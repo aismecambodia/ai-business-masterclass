@@ -1,0 +1,3051 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI សម្រាប់អាជីវកម្ម — Master Class | October 17–18, 2026 · Phnom Penh</title>
+  <meta name="description" content="ក្លាយជាអ្នកជំនាញប្រើ AI ដើម្បីដឹកនាំ ប្រកួតប្រជែង និងពង្រីកអាជីវកម្មរបស់អ្នក។ សិក្ខាសាលា ២ ថ្ងៃ ១៧–១៨ តុលា ២០២៦ ភ្នំពេញ។">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&family=Noto+Serif+Khmer:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Purple (from poster) — replaces navy */
+      --navy: #1F0A4A;
+      --navy-2: #2D1B69;
+      --navy-3: #4C1D95;
+      /* Lime green (from poster) — replaces teal */
+      --teal: #22C55E;
+      --teal-bright: #4ADE80;
+      --teal-dim: #16A34A;
+      --cream: #F8F5EE;
+      --cream-dark: #EEE8DA;
+      --gold: #A855F7;            /* magenta/violet glow accent */
+      --ink: #0A0F1A;
+      --muted: #4A5568;
+      --muted-light: #94A3B8;
+      --line: rgba(255, 255, 255, 0.08);
+      --line-dark: rgba(31, 10, 74, 0.1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Kantumruy Pro', sans-serif;
+      font-weight: 400;
+      line-height: 1.75;
+      color: var(--ink);
+      background: var(--cream);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .display {
+      font-family: 'Noto Serif Khmer', serif;
+      font-weight: 600;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+    }
+
+    .latin { font-family: 'Playfair Display', serif; }
+
+    .eyebrow {
+      font-family: 'Kantumruy Pro', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--teal-bright);
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ==================== NAV ==================== */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 16px 0;
+      background: rgba(31, 10, 74, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand {
+      color: var(--cream);
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: 0.02em;
+    }
+    .brand span { color: var(--teal-bright); }
+
+    /* Nav logo (image version) */
+    .brand-logo {
+      display: block;
+      height: 46px;
+      width: auto;
+      transition: opacity 0.25s ease;
+    }
+    .brand-logo:hover { opacity: 0.85; }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 20px;
+      background: var(--teal);
+      color: var(--navy);
+      text-decoration: none;
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      transition: all 0.25s ease;
+    }
+    .nav-cta:hover { background: var(--teal-bright); transform: translateY(-1px); }
+
+    /* ==================== HERO ==================== */
+    .hero {
+      position: relative;
+      background: var(--navy);
+      color: var(--cream);
+      padding: 120px 0 64px;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(34, 197, 94, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(168, 85, 247, 0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .hero-text { max-width: 640px; text-align: center; margin: 0 auto; }
+    .hero-eyebrow-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .hero-eyebrow-row::before {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background: var(--teal-bright);
+    }
+    .hero-eyebrow-row::after {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background: var(--teal-bright);
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: 20px;
+      color: var(--cream);
+      font-weight: 600;
+    }
+    .hero h1.hero-headline-kh {
+      font-size: clamp(1.55rem, 3.2vw, 2.3rem);
+      line-height: 1.45;
+      font-weight: 700;
+      letter-spacing: -0.005em;
+      margin-bottom: 22px;
+    }
+    .hero-headline-line {
+      display: block;
+      margin-bottom: 10px;
+    }
+    .hero-headline-line:last-child {
+      margin-bottom: 0;
+    }
+    .hero-headline-sub2 {
+      display: block;
+      margin-top: 14px;
+      font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+      font-weight: 500;
+      line-height: 1.6;
+      color: rgba(248, 245, 238, 0.82);
+    }
+    .hero-sub-benefits {
+      font-size: clamp(0.98rem, 1.5vw, 1.15rem);
+      color: rgba(248, 245, 238, 0.78);
+      line-height: 1.7;
+      margin: 0 auto 14px;
+      max-width: 600px;
+    }
+    .hero-sub-dot {
+      color: var(--teal-bright);
+      margin: 0 6px;
+      font-weight: 700;
+    }
+    .hero-sub-punchline {
+      display: inline-block;
+      font-family: 'Noto Serif Khmer', serif;
+      font-size: clamp(1.1rem, 1.9vw, 1.35rem);
+      font-weight: 700;
+      color: var(--teal-bright);
+      line-height: 1.5;
+      margin: 0 auto;
+      padding: 8px 18px;
+      border-top: 1px solid rgba(34, 197, 94, 0.25);
+      border-bottom: 1px solid rgba(34, 197, 94, 0.25);
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--teal-bright);
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 1.5vw, 1.15rem);
+      color: rgba(248, 245, 238, 0.75);
+      max-width: 680px;
+      margin: 0 auto 28px;
+      line-height: 1.75;
+    }
+    .hero-sub em {
+      font-style: normal;
+      color: var(--teal-bright);
+      font-weight: 600;
+    }
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 16px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      font-size: 0.85rem;
+      color: var(--cream);
+    }
+    .badge-dot {
+      width: 6px; height: 6px;
+      background: var(--teal-bright);
+      border-radius: 50%;
+    }
+
+    /* ==================== INTRO SECTION ==================== */
+    .intro {
+      padding: 80px 0 64px;
+      background: var(--cream);
+      border-top: 1px solid var(--cream-dark);
+    }
+    .intro-inner {
+      max-width: 880px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .welcome-video {
+      max-width: 680px;
+      margin: 0 auto 40px;
+    }
+    .welcome-video-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 20px 48px rgba(31, 10, 74, 0.14);
+      border: 1px solid var(--cream-dark);
+    }
+    .welcome-video-thumb {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 16px;
+    }
+    .welcome-video-caption {
+      margin-top: 14px;
+      font-size: 0.95rem;
+      color: var(--muted);
+      font-family: 'Noto Serif Khmer', serif;
+    }
+    .welcome-video-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      border-radius: 16px;
+    }
+    .thankyou-video {
+      margin: 20px auto 24px;
+      max-width: 520px;
+    }
+    .tap-sound-cue {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      z-index: 3;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 14px;
+      background: rgba(15, 6, 30, 0.82);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 100px;
+      font-family: 'Noto Serif Khmer', serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+      transition: background 0.2s ease, transform 0.2s ease;
+      animation: cuePulse 2s ease-in-out infinite;
+    }
+    .tap-sound-cue:hover { background: rgba(15, 6, 30, 0.95); transform: scale(1.04); }
+    .tap-sound-cue.hidden { display: none; }
+    @keyframes cuePulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
+      50% { box-shadow: 0 0 0 8px rgba(34,197,94,0); }
+    }
+    .intro-question {
+      font-family: 'Noto Serif Khmer', serif;
+      font-size: clamp(1.4rem, 2.8vw, 2rem);
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.45;
+      letter-spacing: -0.005em;
+      margin-bottom: 24px;
+    }
+    .intro-question strong {
+      color: var(--teal-dim);
+      font-weight: 700;
+    }
+    .intro-body {
+      font-size: clamp(1rem, 1.5vw, 1.1rem);
+      color: var(--muted);
+      line-height: 1.85;
+      max-width: 720px;
+      margin: 0 auto 36px;
+    }
+    .intro-body em {
+      font-style: normal;
+      color: var(--navy);
+      font-weight: 700;
+      background: linear-gradient(180deg, transparent 60%, rgba(34, 197, 94, 0.18) 60%);
+      padding: 0 4px;
+    }
+    .intro-product {
+      display: inline-block;
+      padding: 24px 36px;
+      background: var(--navy);
+      color: var(--cream);
+      border-radius: 14px;
+      margin-bottom: 16px;
+      max-width: 100%;
+      position: relative;
+      box-shadow: 0 16px 40px rgba(31, 10, 74, 0.18);
+    }
+    .intro-product-eyebrow {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--teal-bright);
+      margin-bottom: 8px;
+    }
+    .intro-product-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 2.8vw, 2rem);
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--cream);
+      margin-bottom: 6px;
+    }
+    .intro-product-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: rgba(248, 245, 238, 0.75);
+    }
+    .intro-quote {
+      margin: 36px auto 0;
+      max-width: 680px;
+      padding: 24px 28px;
+      background: rgba(34, 197, 94, 0.06);
+      border-left: 4px solid var(--teal);
+      border-radius: 0 14px 14px 0;
+      position: relative;
+      text-align: left;
+    }
+    .intro-quote-mark {
+      position: absolute;
+      top: 4px;
+      left: 16px;
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      color: rgba(34, 197, 94, 0.25);
+      line-height: 1;
+    }
+    .intro-quote-text {
+      font-family: 'Noto Serif Khmer', serif;
+      font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.7;
+      margin: 0 0 12px;
+      padding-left: 28px;
+    }
+    .intro-quote-cite {
+      display: block;
+      font-style: normal;
+      font-size: 0.9rem;
+      color: var(--teal);
+      font-weight: 600;
+      padding-left: 28px;
+    }
+    .intro-quote-attribution {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-left: 28px;
+      margin-top: 14px;
+    }
+    .intro-quote-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 2px solid rgba(34, 197, 94, 0.3);
+    }
+    .intro-quote-attribution .intro-quote-cite {
+      padding-left: 0;
+      margin: 0;
+    }
+    .intro-audience {
+      font-size: 0.95rem;
+      color: var(--muted);
+      font-style: italic;
+      margin-bottom: 48px;
+    }
+    .intro-promise-lead {
+      font-family: 'Noto Serif Khmer', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 28px;
+    }
+    .intro-pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      text-align: left;
+    }
+    .pillar {
+      background: white;
+      padding: 28px 26px;
+      border-radius: 14px;
+      border-top: 3px solid var(--teal);
+      box-shadow: 0 4px 14px rgba(31, 10, 74, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .pillar:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(31, 10, 74, 0.1);
+    }
+    .pillar-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+      color: var(--teal-dim);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .pillar-tag::before {
+      content: '✓';
+      width: 22px;
+      height: 22px;
+      background: var(--teal);
+      color: white;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .pillar-text {
+      font-size: 0.96rem;
+      color: var(--navy);
+      line-height: 1.65;
+    }
+
+    /* ==================== HERO COVER (transparent poster) ==================== */
+    .hero-cover {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      transition: transform 0.5s ease;
+    }
+    .hero-cover:hover { transform: translateY(-4px); }
+    .hero-cover img {
+      display: block;
+      width: 100%;
+      height: auto;
+      /* Soft ambient drop shadow for depth */
+      filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.35))
+              drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
+    }
+    .hero-trust-line {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      flex-wrap: wrap;
+    }
+    .hero-trust-badge {
+      display: inline-block;
+      padding: 5px 14px;
+      background: linear-gradient(135deg, #FCD34D 0%, #FBBF24 100%);
+      color: #12124F;
+      font-family: 'Noto Serif Khmer', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      border-radius: 100px;
+      letter-spacing: 0.01em;
+    }
+    .hero-trust-text {
+      font-family: 'Noto Serif Khmer', serif;
+      font-size: 0.85rem;
+      color: rgba(248, 245, 238, 0.85);
+      font-weight: 500;
+    }
+    .hero-date-wrap {
+      margin-top: 18px;
+      text-align: center;
+    }
+    .hero-date-eyebrow {
+      display: inline-block;
+      margin-bottom: 10px;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #FBBF24;
+    }
+    .hero-date-eyebrow-kh {
+      font-family: 'Noto Serif Khmer', serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--cream);
+      margin-right: 8px;
+    }
+    .hero-date-banner {
+      display: inline-block;
+      padding: 16px 28px;
+      background: linear-gradient(135deg, #FCD34D 0%, #FBBF24 100%);
+      border-radius: 14px;
+      text-align: center;
+      font-family: 'Noto Serif Khmer', serif;
+      font-size: clamp(1.35rem, 2.6vw, 1.7rem);
+      font-weight: 800;
+      color: #12124F;
+      letter-spacing: 0.01em;
+      box-shadow: 0 14px 32px rgba(245, 158, 11, 0.35),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      line-height: 1.25;
+    }
+
+    /* ==================== CAPSULE GRID (shared by Overview + Deliverables) ==================== */
+    .capsule-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 36px;
+    }
+    .capsule-grid.cols-4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .capsule-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .capsule {
+      display: flex;
+      gap: 14px;
+      padding: 18px 20px 18px 18px;
+      background: white;
+      border-radius: 10px;
+      border-left: 3px solid var(--teal);
+      transition: all 0.25s ease;
+      align-items: center;
+    }
+    .capsule:hover {
+      transform: translateX(3px);
+      box-shadow: 0 6px 18px rgba(31, 10, 74, 0.06);
+    }
+    .capsule-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--teal-dim);
+      font-weight: 500;
+      min-width: 26px;
+      line-height: 1.3;
+    }
+    .capsule-icon {
+      width: 36px; height: 36px;
+      background: rgba(34, 197, 94, 0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--teal-dim);
+      flex-shrink: 0;
+    }
+    .capsule-body {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+    .capsule-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .capsule-value {
+      color: var(--navy);
+      font-size: 0.98rem;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+    .capsule-text {
+      color: var(--navy);
+      font-size: 0.96rem;
+      font-weight: 500;
+      line-height: 1.55;
+    }
+
+    /* ==================== SECTION DEFAULTS ==================== */
+    .section { padding: 68px 0; }
+    .section-cream {
+      background: var(--cream);
+      border-top: 1px solid var(--cream-dark);
+    }
+    .section-cream-dark { background: var(--cream-dark); }
+
+    /* Alumni benefits (ongoing support) */
+    .alumni-benefits {
+      background: linear-gradient(135deg, #0F6E56 0%, #1D9E75 100%);
+      color: #fff;
+    }
+    .alumni-benefits .eyebrow { color: rgba(255,255,255,0.85); }
+    .alumni-benefits .section-header h2 { color: #fff; }
+    .alumni-benefits .section-header p { color: rgba(255,255,255,0.9); }
+    .alumni-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 44px;
+      max-width: 860px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .alumni-card {
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 18px;
+      padding: 32px 28px;
+      text-align: center;
+      backdrop-filter: blur(4px);
+    }
+    .alumni-icon {
+      width: 60px; height: 60px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.16);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+    }
+    .alumni-icon-photo {
+      width: 96px; height: 96px;
+      background: rgba(255,255,255,0.9);
+      overflow: hidden;
+      border: 2px solid rgba(255,255,255,0.55);
+    }
+    .alumni-icon-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    .alumni-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+    .alumni-desc {
+      font-family: 'Noto Serif Khmer', serif;
+      font-size: 0.98rem;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.92);
+    }
+    @media (max-width: 760px) {
+      .alumni-grid { grid-template-columns: 1fr; max-width: 440px; }
+    }
+
+    .section-dark {
+      background: var(--navy);
+      color: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+    .section-header {
+      max-width: 700px;
+      margin: 0 auto 8px;
+      text-align: center;
+    }
+    .section-header .eyebrow {
+      color: var(--teal-dim);
+      margin-bottom: 12px;
+      display: block;
+    }
+    .section-dark .section-header .eyebrow { color: var(--teal-bright); }
+    .section-header h2 {
+      font-size: clamp(1.65rem, 3.2vw, 2.25rem);
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+    .section-dark .section-header h2 { color: var(--cream); }
+    .section-header p {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+    .section-dark .section-header p { color: rgba(248, 245, 238, 0.72); }
+
+    .overview-note {
+      text-align: center;
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-style: italic;
+    }
+
+    /* Centered audience/seat callout (replaces old 3-capsule grid) */
+    .overview-callout {
+      margin-top: 8px;
+      text-align: center;
+    }
+    .overview-callout-line {
+      font-family: 'Noto Serif Khmer', serif;
+      font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+      color: var(--navy);
+      line-height: 1.6;
+      margin: 4px 0;
+    }
+    .overview-callout-emphasis {
+      font-weight: 700;
+      color: var(--teal);
+      font-size: clamp(1.15rem, 2vw, 1.35rem);
+      margin-top: 6px;
+    }
+
+    /* Event details strip (date / time / location) */
+    .event-details {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 36px;
+      padding: 24px 28px;
+      background: var(--navy);
+      border-radius: 14px;
+      color: var(--cream);
+      box-shadow: 0 12px 32px rgba(31, 10, 74, 0.18);
+    }
+    .event-detail {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .event-detail + .event-detail {
+      border-left: 1px solid var(--line);
+      padding-left: 16px;
+    }
+    .event-detail-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    .event-detail-body {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+    .event-detail-label {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--teal-bright);
+      font-weight: 500;
+    }
+    .event-detail-value {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--cream);
+      line-height: 1.4;
+    }
+
+    /* ==================== PROMISE ==================== */
+    .promise::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 70% 40%, rgba(34, 197, 94, 0.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .promise-inner {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 56px;
+      align-items: start;
+    }
+    .promise-left .eyebrow {
+      display: block;
+      margin-bottom: 16px;
+      color: var(--teal-bright);
+    }
+    .promise-left h2 {
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      color: var(--cream);
+      margin-bottom: 16px;
+    }
+    .promise-left h2 em {
+      font-style: normal;
+      color: var(--teal-bright);
+    }
+    .promise-left p {
+      color: rgba(248, 245, 238, 0.75);
+      font-size: 1rem;
+    }
+    .promise-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .promise-item {
+      display: flex;
+      gap: 18px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .promise-item:last-child { border-bottom: none; }
+    .promise-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--teal-bright);
+      font-weight: 500;
+      min-width: 34px;
+      padding-top: 2px;
+    }
+    .promise-text {
+      color: rgba(248, 245, 238, 0.92);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    /* ==================== OUTLINE ==================== */
+    .day-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 36px;
+    }
+    .day-card {
+      padding: 32px 28px;
+      border-radius: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+    .day-1 {
+      background: var(--navy);
+      color: var(--cream);
+      border: 1px solid var(--navy-3);
+    }
+    .day-2 {
+      background: white;
+      color: var(--navy);
+      border: 1px solid var(--cream-dark);
+    }
+    .day-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .day-1 .day-label { color: var(--teal-bright); }
+    .day-2 .day-label { color: var(--teal-dim); }
+    .day-label::before {
+      content: '';
+      width: 22px; height: 1px;
+    }
+    .day-1 .day-label::before { background: var(--teal-bright); }
+    .day-2 .day-label::before { background: var(--teal-dim); }
+
+    .day-card h3 {
+      font-size: 1.45rem;
+      margin-bottom: 8px;
+      line-height: 1.35;
+    }
+    .day-subject {
+      font-size: 0.92rem;
+      margin-bottom: 22px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid;
+    }
+    .day-1 .day-subject {
+      color: rgba(248, 245, 238, 0.7);
+      border-color: var(--line);
+    }
+    .day-2 .day-subject {
+      color: var(--muted);
+      border-color: var(--cream-dark);
+    }
+
+    .lesson-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .lesson {
+      padding-left: 28px;
+      position: relative;
+    }
+    .lesson::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 11px;
+      width: 18px; height: 1px;
+    }
+    .day-1 .lesson::before { background: var(--teal-bright); }
+    .day-2 .lesson::before { background: var(--teal-dim); }
+    .lesson-title {
+      font-weight: 600;
+      font-size: 0.98rem;
+      margin-bottom: 3px;
+      line-height: 1.45;
+    }
+    .lesson-desc {
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+    .day-1 .lesson-desc { color: rgba(248, 245, 238, 0.68); }
+    .day-2 .lesson-desc { color: var(--muted); }
+
+    .closing-note {
+      margin-top: 22px;
+      padding-top: 16px;
+      border-top: 1px solid;
+      font-size: 0.88rem;
+      font-style: italic;
+    }
+    .day-2 .closing-note {
+      border-color: var(--cream-dark);
+      color: var(--muted);
+    }
+
+    /* ==================== CTA BLOCK (Register + Price) ==================== */
+    .cta-block {
+      padding: 48px 0;
+      background: var(--cream);
+    }
+    .cta-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 44px 40px;
+      background: var(--navy);
+      border-radius: 16px;
+      color: var(--cream);
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .cta-inner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(34, 197, 94, 0.18) 0%, transparent 55%),
+        radial-gradient(circle at 85% 70%, rgba(168, 85, 247, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .cta-content { position: relative; z-index: 1; }
+    .cta-block .eyebrow {
+      color: var(--teal-bright);
+      display: block;
+      margin-bottom: 12px;
+    }
+    .cta-block h2 {
+      font-family: 'Noto Serif Khmer', serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      color: var(--cream);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .cta-block h2 em {
+      font-style: normal;
+      color: var(--teal-bright);
+    }
+    .cta-sub {
+      color: rgba(248, 245, 238, 0.75);
+      font-size: 0.98rem;
+      margin-bottom: 24px;
+    }
+    .cta-price-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 10px;
+      color: rgba(248, 245, 238, 0.75);
+      font-size: 0.95rem;
+      margin-bottom: 22px;
+    }
+    .cta-price-row strong {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1;
+    }
+
+    /* Promo pricing block */
+    .cta-promo-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+    .cta-promo-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      background: linear-gradient(135deg, #FCD34D 0%, #FBBF24 100%);
+      color: #0A0518;
+      border-radius: 100px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      animation: pulseGlow 2.5s ease-in-out infinite;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.5); }
+      50% { box-shadow: 0 0 0 12px rgba(251, 191, 36, 0); }
+    }
+    .cta-prices {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .cta-price-old {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: rgba(248, 245, 238, 0.5);
+      text-decoration: line-through;
+      text-decoration-thickness: 2px;
+      text-decoration-color: rgba(239, 68, 68, 0.7);
+      line-height: 1;
+    }
+    .cta-price-new {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #FBBF24;
+      line-height: 1;
+    }
+    .cta-price-unit {
+      color: rgba(248, 245, 238, 0.75);
+      font-size: 0.95rem;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 32px;
+      background: var(--teal);
+      color: var(--navy);
+      text-decoration: none;
+      border-radius: 100px;
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 24px rgba(34, 197, 94, 0.25);
+    }
+    .btn-primary:hover {
+      background: var(--teal-bright);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(34, 197, 94, 0.35);
+    }
+    .btn-primary svg { transition: transform 0.3s ease; }
+    .btn-primary:hover svg { transform: translateX(4px); }
+    .cta-included {
+      margin-top: 18px;
+      font-size: 0.82rem;
+      color: rgba(248, 245, 238, 0.55);
+      font-style: italic;
+    }
+
+    /* Burger layout: top bun (price-included), meat (price+CTA), bottom bun (bonuses) */
+    .cta-bun-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 100px;
+      font-size: 0.82rem;
+      color: rgba(248, 245, 238, 0.78);
+      margin-bottom: 28px;
+      line-height: 1.4;
+    }
+    .cta-bun-top::before {
+      content: '✦';
+      color: var(--teal-bright);
+      font-size: 0.95rem;
+    }
+
+    /* ==================== REGISTRATION CLOSE COUNTDOWN (red/amber urgency) ==================== */
+    .close-countdown {
+      margin: 8px auto 18px;
+      padding: 18px 22px 16px;
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.16) 0%, rgba(245, 158, 11, 0.08) 100%);
+      border: 1.5px solid rgba(251, 191, 36, 0.45);
+      border-radius: 14px;
+      max-width: 560px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 8px 28px rgba(245, 158, 11, 0.12);
+    }
+    .close-countdown.hidden { display: none; }
+    .close-countdown-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #FBBF24;
+      margin-bottom: 8px;
+    }
+    .close-countdown-eyebrow::before { content: '⚠'; font-size: 0.9rem; }
+    .close-countdown-title {
+      font-family: 'Noto Serif Khmer', serif;
+      font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1.5;
+      margin-bottom: 2px;
+      letter-spacing: -0.005em;
+    }
+    .close-countdown-sub {
+      font-size: 0.82rem;
+      color: rgba(248, 245, 238, 0.65);
+      margin-bottom: 12px;
+    }
+    .close-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      max-width: 340px;
+      margin: 0 auto;
+    }
+    .close-unit {
+      background: rgba(11, 6, 25, 0.55);
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      border-radius: 10px;
+      padding: 10px 6px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .close-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #FBBF24;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
+    }
+    .close-unit-label {
+      margin-top: 3px;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(251, 191, 36, 0.8);
+      font-weight: 600;
+    }
+
+    /* Registration Closed state (shown after May 31) */
+    .registration-closed {
+      display: none;
+      padding: 32px 28px;
+      background: rgba(11, 6, 25, 0.55);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      text-align: center;
+      margin: 28px auto;
+      max-width: 560px;
+    }
+    .registration-closed.visible { display: block; }
+    .registration-closed-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      background: rgba(248, 113, 113, 0.12);
+      border: 2px solid rgba(248, 113, 113, 0.35);
+      border-radius: 50%;
+      color: #F87171;
+      font-size: 1.5rem;
+      margin-bottom: 14px;
+    }
+    .registration-closed-title {
+      font-family: 'Noto Serif Khmer', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 12px;
+    }
+    .registration-closed-body {
+      font-size: 0.95rem;
+      color: rgba(248, 245, 238, 0.78);
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+    .registration-closed-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: rgba(34, 197, 94, 0.12);
+      border: 1px solid rgba(34, 197, 94, 0.35);
+      border-radius: 100px;
+      color: var(--teal-bright);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 600;
+      transition: all 0.25s ease;
+    }
+    .registration-closed-link:hover {
+      background: rgba(34, 197, 94, 0.2);
+      border-color: rgba(74, 222, 128, 0.55);
+    }
+
+    /* ==================== PROMO COUNTDOWN ==================== */
+    .promo-countdown {
+      margin: 28px auto 24px;
+      padding: 22px 24px;
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(245, 158, 11, 0.06) 100%);
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      border-radius: 14px;
+      max-width: 520px;
+      text-align: center;
+      position: relative;
+    }
+    .promo-countdown.hidden { display: none; }
+    .cta-price-row.hidden { display: none; }
+    .cta-promo-block.hidden { display: none; }
+
+    /* ==================== TWO-TIER PRICING (Solo + Group) ==================== */
+    .cta-pricing-tiers {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 24px auto;
+      max-width: 560px;
+    }
+    .pricing-tier {
+      padding: 22px 18px;
+      border-radius: 14px;
+      text-align: center;
+      position: relative;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .pricing-tier.tier-solo {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--line);
+    }
+    .pricing-tier.tier-group {
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.12) 0%, rgba(34, 197, 94, 0.06) 100%);
+      border: 1.5px solid rgba(74, 222, 128, 0.45);
+      box-shadow: 0 10px 30px rgba(34, 197, 94, 0.12);
+    }
+    .pricing-tier.tier-group::before {
+      content: '★ BEST VALUE';
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #FCD34D 0%, #FBBF24 100%);
+      color: #0A0518;
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      white-space: nowrap;
+    }
+    .pricing-tier-label {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--teal-bright);
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+    .pricing-tier.tier-solo .pricing-tier-label {
+      color: rgba(248, 245, 238, 0.65);
+    }
+    .pricing-tier-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+    .pricing-tier.tier-group .pricing-tier-price {
+      color: #4ADE80;
+    }
+    .pricing-tier-unit {
+      font-size: 0.78rem;
+      color: rgba(248, 245, 238, 0.6);
+      margin-bottom: 10px;
+      display: block;
+    }
+    .pricing-tier-note {
+      font-size: 0.82rem;
+      color: rgba(248, 245, 238, 0.78);
+      line-height: 1.5;
+    }
+    .pricing-tier-savings {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 2px 8px;
+      background: rgba(251, 191, 36, 0.18);
+      border-radius: 100px;
+      font-size: 0.7rem;
+      color: #FBBF24;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .promo-countdown-label {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #FBBF24;
+      margin-bottom: 16px;
+    }
+    .promo-countdown-label::before { content: '⚡'; font-size: 1rem; }
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      max-width: 380px;
+      margin: 0 auto;
+    }
+    .countdown-unit {
+      background: rgba(11, 6, 25, 0.4);
+      border: 1px solid rgba(251, 191, 36, 0.2);
+      border-radius: 10px;
+      padding: 12px 6px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .countdown-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
+    }
+    .countdown-label {
+      margin-top: 4px;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(251, 191, 36, 0.75);
+      font-weight: 600;
+    }
+    .promo-countdown-tagline {
+      margin-top: 14px;
+      font-size: 0.82rem;
+      color: rgba(248, 245, 238, 0.72);
+      font-style: italic;
+    }
+    .promo-countdown-tagline strong {
+      color: var(--teal-bright);
+      font-style: normal;
+      font-weight: 700;
+    }
+
+    .cta-bun-bottom {
+      margin-top: 32px;
+      padding-top: 28px;
+      border-top: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      text-align: left;
+    }
+    .cta-bonus {
+      display: flex;
+      gap: 12px;
+      padding: 16px 18px;
+      background: rgba(34, 197, 94, 0.08);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+      border-radius: 10px;
+      align-items: flex-start;
+    }
+    .cta-bonus-icon {
+      font-size: 1.3rem;
+      flex-shrink: 0;
+      line-height: 1.2;
+    }
+    .cta-bonus-text {
+      font-size: 0.88rem;
+      color: rgba(248, 245, 238, 0.92);
+      line-height: 1.5;
+    }
+    .cta-bonus-text strong {
+      color: var(--teal-bright);
+      font-weight: 700;
+    }
+
+    /* Satisfaction Guarantee Panel */
+    .cta-guarantee {
+      margin-top: 24px;
+      padding: 24px 28px;
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.08) 0%, rgba(245, 158, 11, 0.05) 100%);
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      border-radius: 14px;
+      text-align: center;
+      position: relative;
+    }
+    .cta-guarantee-shield {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      margin-bottom: 12px;
+      background: rgba(251, 191, 36, 0.15);
+      border: 2px solid rgba(251, 191, 36, 0.4);
+      border-radius: 50%;
+      color: #FBBF24;
+    }
+    .cta-guarantee-title {
+      font-family: 'Noto Serif Khmer', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #FBBF24;
+      margin-bottom: 12px;
+      letter-spacing: 0.01em;
+    }
+    .cta-guarantee-body {
+      font-size: 0.95rem;
+      color: rgba(248, 245, 238, 0.88);
+      line-height: 1.7;
+      max-width: 560px;
+      margin: 0 auto 12px;
+    }
+    .cta-guarantee-body strong {
+      color: #FBBF24;
+      font-weight: 700;
+    }
+    .cta-guarantee-divider {
+      width: 40px;
+      height: 1px;
+      background: rgba(251, 191, 36, 0.3);
+      margin: 14px auto;
+    }
+    .cta-guarantee-tagline {
+      font-size: 0.88rem;
+      color: rgba(248, 245, 238, 0.7);
+      font-style: italic;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .cta-guarantee-tagline strong {
+      color: var(--teal-bright);
+      font-style: normal;
+      font-weight: 700;
+    }
+
+    /* ==================== TESTIMONIALS ==================== */
+    .testimonials {
+      padding: 80px 0;
+      background: var(--cream);
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    @media (max-width: 1024px) {
+      .testimonials-grid { grid-template-columns: 1fr; max-width: 640px; margin-left: auto; margin-right: auto; }
+    }
+
+    /* Cohort #1 group photo block (above testimonial cards) */
+    .cohort-group-photo {
+      margin: 40px auto 0;
+      max-width: 940px;
+      text-align: center;
+    }
+    .cohort-group-photo img {
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      box-shadow: 0 20px 56px rgba(31, 10, 74, 0.18),
+                  0 8px 24px rgba(31, 10, 74, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+    .cohort-group-caption {
+      margin-top: 16px;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.92rem;
+      font-style: italic;
+      color: var(--muted);
+      letter-spacing: 0.01em;
+    }
+    .testimonial-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--cream-dark);
+      box-shadow: 0 8px 24px rgba(31, 10, 74, 0.06);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .testimonial-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 48px rgba(31, 10, 74, 0.12);
+    }
+    .testimonial-quote {
+      padding: 32px 32px 24px;
+      position: relative;
+    }
+    .testimonial-quote::before {
+      content: '"';
+      position: absolute;
+      top: 8px;
+      left: 24px;
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--teal);
+      opacity: 0.18;
+    }
+    .testimonial-quote-text {
+      position: relative;
+      font-family: 'Noto Serif Khmer', serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: var(--navy);
+      letter-spacing: -0.005em;
+    }
+    .testimonial-video {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #000;
+      overflow: hidden;
+    }
+    .testimonial-video iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    /* Lazy-load thumbnail (shown until user clicks play) */
+    .testimonial-video-thumb {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.2s ease;
+    }
+    .testimonial-video-thumb::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.45) 100%);
+    }
+    .testimonial-video-thumb:hover { opacity: 0.95; }
+    .play-button {
+      position: relative;
+      z-index: 1;
+      width: 72px;
+      height: 72px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      transition: transform 0.25s ease, background 0.25s ease;
+    }
+    .testimonial-video-thumb:hover .play-button {
+      transform: scale(1.08);
+      background: var(--teal);
+    }
+    .play-button svg {
+      width: 28px;
+      height: 28px;
+      fill: var(--navy);
+      margin-left: 4px;
+      transition: fill 0.25s ease;
+    }
+    .testimonial-video-thumb:hover .play-button svg {
+      fill: white;
+    }
+    .testimonial-attribution {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 20px 32px 28px;
+      border-top: 1px solid var(--cream-dark);
+    }
+    .testimonial-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 2px solid var(--cream-dark);
+    }
+    .testimonial-avatar-initial {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-bright) 100%);
+      color: white;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.02em;
+      border-color: transparent;
+    }
+    .testimonial-name {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--navy);
+      line-height: 1.3;
+      margin-bottom: 2px;
+    }
+    .testimonial-title {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .testimonial-context {
+      font-size: 0.78rem;
+      color: var(--teal-dim);
+      font-style: italic;
+      margin-top: 4px;
+    }
+
+    /* ==================== PHOTO STRIP (3 squares) ==================== */    .photo-strip {
+      padding: 40px 0 48px;
+      background: var(--cream);
+    }
+    .strip-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .strip-header .eyebrow {
+      color: var(--teal-dim);
+      margin-bottom: 8px;
+      display: block;
+    }
+    .strip-header h3 {
+      font-family: 'Noto Serif Khmer', serif;
+      font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+      color: var(--navy);
+    }
+    .strip-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .photo-placeholder {
+      position: relative;
+      background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 100%);
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(248, 245, 238, 0.55);
+      text-align: center;
+      padding: 20px;
+      transition: transform 0.4s ease;
+      aspect-ratio: 1/1;
+    }
+    .photo-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(34, 197, 94, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 70% 70%, rgba(168, 85, 247, 0.12) 0%, transparent 50%);
+    }
+    .photo-placeholder:hover { transform: translateY(-3px); }
+    .photo-placeholder .ph-content { position: relative; z-index: 1; }
+    .photo-placeholder img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+      transition: transform 0.6s ease;
+    }
+    .photo-placeholder:hover img { transform: scale(1.03); }
+    .photo-placeholder svg {
+      opacity: 0.4;
+      margin-bottom: 6px;
+    }
+    .photo-placeholder p {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    /* ==================== REGISTER ==================== */
+    .register {
+      padding: 64px 0;
+      background: var(--navy);
+      color: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+    .register::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(34, 197, 94, 0.18) 0%, transparent 50%),
+        radial-gradient(circle at 85% 80%, rgba(168, 85, 247, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .register-inner {
+      position: relative;
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .register .eyebrow {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: var(--teal-bright);
+    }
+    .register h2 {
+      font-family: 'Noto Serif Khmer', serif;
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      color: var(--cream);
+      margin-bottom: 12px;
+    }
+    .register h2 em {
+      font-style: normal;
+      color: var(--teal-bright);
+    }
+    .register-sub {
+      color: rgba(248, 245, 238, 0.75);
+      font-size: 1rem;
+      margin-bottom: 28px;
+    }
+    .form-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 32px 28px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      text-align: left;
+    }
+    .form-field { margin-bottom: 18px; }
+    .form-field:last-of-type { margin-bottom: 24px; }
+
+    /* Honeypot field — hidden from humans, visible to naive bots */
+    .form-honeypot {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .form-field label {
+      display: block;
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--teal-bright);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .form-field label .required {
+      color: #F87171;
+      font-weight: 700;
+      margin-left: 2px;
+    }
+    .form-field input {
+      width: 100%;
+      padding: 14px 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      color: var(--cream);
+      font-family: 'Kantumruy Pro', sans-serif;
+      font-size: 1rem;
+      transition: all 0.25s ease;
+    }
+    .form-field input::placeholder { color: rgba(248, 245, 238, 0.35); }
+    .form-field input:focus {
+      outline: none;
+      border-color: var(--teal);
+      background: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.15);
+    }
+    .form-hint {
+      margin-top: 8px;
+      font-size: 0.82rem;
+      color: rgba(248, 245, 238, 0.65);
+      line-height: 1.5;
+    }
+    .form-submit {
+      width: 100%;
+      padding: 16px;
+      background: var(--teal);
+      color: var(--navy);
+      border: none;
+      border-radius: 10px;
+      font-family: 'Kantumruy Pro', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .form-submit:hover {
+      background: var(--teal-bright);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(34, 197, 94, 0.3);
+    }
+    .form-submit:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    .form-submit .spinner {
+      width: 18px; height: 18px;
+      border: 2px solid rgba(31, 10, 74, 0.3);
+      border-top-color: var(--navy);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Inline error message */
+    .form-error {
+      margin-top: 14px;
+      padding: 12px 16px;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 8px;
+      color: #FCA5A5;
+      font-size: 0.88rem;
+      display: none;
+    }
+    .form-error.visible { display: block; }
+
+    /* Success panel — replaces the form after submission */
+    .success-panel {
+      display: none;
+      text-align: center;
+      padding: 8px 0;
+      animation: fadeIn 0.5s ease;
+    }
+    .success-panel.visible { display: block; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .success-icon {
+      width: 72px; height: 72px;
+      margin: 0 auto 20px;
+      background: rgba(34, 197, 94, 0.15);
+      border: 2px solid rgba(74, 222, 128, 0.4);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--teal-bright);
+    }
+    .success-panel h3 {
+      font-family: 'Noto Serif Khmer', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+    .success-panel > p {
+      color: rgba(248, 245, 238, 0.8);
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+    .success-highlight {
+      padding: 14px 18px;
+      background: rgba(34, 197, 94, 0.08);
+      border-left: 3px solid var(--teal);
+      border-radius: 8px;
+      color: rgba(248, 245, 238, 0.9);
+      font-size: 0.92rem;
+      line-height: 1.65;
+      text-align: left;
+    }
+    .form-note {
+      margin-top: 14px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: rgba(248, 245, 238, 0.55);
+    }
+
+    /* ==================== FOOTER ==================== */
+    .footer {
+      padding: 48px 0 40px;
+      background: #0A0518;
+      color: rgba(248, 245, 238, 0.7);
+      text-align: center;
+      border-top: 1px solid var(--line);
+      font-size: 0.9rem;
+    }
+    .footer-brand-link {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: inherit;
+      padding: 8px 16px;
+      border-radius: 12px;
+      transition: all 0.25s ease;
+    }
+    .footer-brand-link:hover {
+      background: rgba(34, 197, 94, 0.06);
+      transform: translateY(-2px);
+    }
+    .footer-logo {
+      width: 72px;
+      height: 72px;
+      display: block;
+    }
+    .footer-brand-name {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: var(--teal-bright);
+      letter-spacing: 0.02em;
+      line-height: 1;
+    }
+    .footer-tag {
+      color: rgba(248, 245, 238, 0.55);
+      font-size: 0.85rem;
+      letter-spacing: 0.02em;
+      margin-top: 4px;
+      font-style: italic;
+    }
+    .footer-follow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 20px;
+      padding: 10px 22px;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.25);
+      border-radius: 100px;
+      color: var(--teal-bright);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: all 0.25s ease;
+    }
+    .footer-follow:hover {
+      background: rgba(34, 197, 94, 0.18);
+      border-color: rgba(74, 222, 128, 0.4);
+      color: #86EFAC;
+    }
+    .footer-divider {
+      width: 60px;
+      height: 1px;
+      background: var(--line);
+      margin: 24px auto 16px;
+    }
+    .footer-legal {
+      color: rgba(248, 245, 238, 0.35);
+      font-size: 0.78rem;
+      letter-spacing: 0.02em;
+    }
+
+    /* ==================== REVEAL ANIMATION ==================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ==================== RESPONSIVE ==================== */
+    @media (max-width: 900px) {
+      .capsule-grid, .capsule-grid.cols-4, .capsule-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+      .day-cards { grid-template-columns: 1fr; }
+      .promise-inner { grid-template-columns: 1fr; gap: 32px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+      .hero-text { max-width: 100%; }
+      .hero h1.hero-headline-kh { font-size: 1.35rem; margin-bottom: 16px; }
+      .hero-headline-line { margin-bottom: 8px; }
+      .hero-sub-benefits { font-size: 0.95rem; margin-bottom: 12px; }
+      .hero-sub-punchline { font-size: 1.05rem; padding: 6px 14px; }
+      .hero-cover { max-width: 380px; }
+      .intro-pillars { grid-template-columns: 1fr; gap: 10px; }
+      .testimonials-grid { grid-template-columns: 1fr; gap: 20px; }
+    }
+
+    @media (max-width: 640px) {
+      .section { padding: 32px 0; }
+      .hero { padding: 86px 0 28px; }
+      .intro { padding: 36px 0 28px; }
+      .intro-product { padding: 18px 22px; margin-bottom: 12px; }
+      .intro-quote { padding: 20px 18px 18px; margin-top: 24px; }
+      .intro-quote-text { font-size: 1rem; padding-left: 20px; }
+      .intro-quote-cite { padding-left: 20px; font-size: 0.85rem; }
+      .intro-quote-mark { font-size: 2.4rem; left: 10px; }
+      .intro-body { margin-bottom: 24px; }
+      .intro-audience { margin-bottom: 28px; }
+      .pillar { padding: 18px 18px; }
+      .event-details { grid-template-columns: 1fr; gap: 12px; padding: 18px 20px; margin-bottom: 24px; }
+      .event-detail + .event-detail { border-left: none; padding-left: 0; padding-top: 12px; border-top: 1px solid var(--line); }
+      .cta-bun-bottom { grid-template-columns: 1fr; gap: 8px; margin-top: 20px; padding-top: 18px; }
+      .cta-bun-top { font-size: 0.78rem; padding: 9px 16px; margin-bottom: 18px; }
+      .close-countdown { padding: 14px 14px 12px; margin: 6px auto 14px; }
+      .close-countdown-title { font-size: 0.9rem; }
+      .close-countdown-sub { font-size: 0.78rem; margin-bottom: 10px; }
+      .close-grid { gap: 6px; max-width: 300px; }
+      .close-unit { padding: 8px 4px 6px; }
+      .close-value { font-size: 1.35rem; }
+      .close-unit-label { font-size: 0.58rem; }
+      .registration-closed { padding: 24px 20px; margin: 22px auto; }
+      .registration-closed-title { font-size: 1.1rem; }
+      .cta-pricing-tiers { grid-template-columns: 1fr; gap: 14px; margin: 18px auto; }
+      .pricing-tier { padding: 20px 16px; }
+      .pricing-tier-price { font-size: 1.75rem; }
+      .promo-countdown { padding: 16px 16px; margin: 18px auto 18px; }
+      .countdown-grid { gap: 8px; max-width: 320px; }
+      .countdown-unit { padding: 10px 4px 8px; }
+      .countdown-value { font-size: 1.5rem; }
+      .countdown-label { font-size: 0.6rem; }
+      .cta-guarantee { padding: 18px 20px; margin-top: 18px; }
+      .cta-guarantee-title { font-size: 1rem; }
+      .cta-guarantee-body { font-size: 0.9rem; }
+      .testimonials { padding: 36px 0; }
+      .cohort-group-photo { margin-top: 24px; }
+      .cohort-group-photo img { border-radius: 12px; }
+      .cohort-group-caption { font-size: 0.82rem; margin-top: 12px; }
+      .testimonials-grid { margin-top: 24px; gap: 16px; }
+      .testimonial-quote { padding: 22px 22px 16px; }
+      .testimonial-quote-text { font-size: 1rem; }
+      .testimonial-attribution { padding: 14px 22px 18px; }
+      .play-button { width: 60px; height: 60px; }
+      .play-button svg { width: 22px; height: 22px; }
+      .hero-grid { gap: 24px; }
+      .hero-cover { max-width: 320px; }
+      .hero-date-wrap { margin-top: 14px; }
+      .hero-date-eyebrow { font-size: 0.65rem; margin-bottom: 8px; }
+      .hero-date-eyebrow-kh { font-size: 0.85rem; }
+      .hero-date-banner { font-size: 1.2rem; padding: 14px 22px; }
+      .hero-badges { margin-bottom: 20px; gap: 8px; }
+      .capsule-grid, .capsule-grid.cols-4, .capsule-grid.cols-3 { grid-template-columns: 1fr; gap: 8px; margin-top: 20px; }
+      .capsule { padding: 13px 16px; }
+      .strip-grid { gap: 8px; }
+      .day-card { padding: 22px 18px; }
+      .day-cards { gap: 12px; margin-top: 20px; }
+      .cta-block { padding: 28px 0; }
+      .cta-inner { padding: 26px 20px; border-radius: 14px; }
+      .photo-strip { padding: 24px 0 28px; }
+      .register { padding: 36px 0; }
+      .form-card { padding: 22px 18px; }
+      .footer { padding: 24px 0; }
+      .nav { padding: 12px 0; }
+      .nav-cta { padding: 8px 16px; font-size: 0.8rem; }
+      .brand-logo { height: 36px; }
+      .brand { font-size: 1.05rem; }
+      .section-header { margin-bottom: 4px; }
+      .section-header h2 { margin-bottom: 8px; }
+      .section-header p { font-size: 0.92rem; }
+      .hero h1 { margin-bottom: 12px; }
+      .hero-sub { margin-bottom: 16px; }
+      .badge { padding: 7px 14px; font-size: 0.8rem; }
+      .promise-item { padding: 12px 0; gap: 14px; }
+      .promise-num { min-width: 30px; font-size: 1.05rem; }
+      .cta-price-row strong { font-size: 1.85rem; }
+      .cta-price-old { font-size: 1.25rem; }
+      .cta-price-new { font-size: 2rem; }
+      .btn-primary { padding: 14px 26px; font-size: 0.95rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== NAV ==================== -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="#" aria-label="AI for Business Masterclass">
+        <img src="logo-masterclass.png" alt="AI for Business Masterclass" class="brand-logo">
+      </a>
+      <a href="#register" class="nav-cta">ចុះឈ្មោះ</a>
+    </div>
+  </nav>
+
+  <!-- ==================== HERO ==================== -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-grid">
+        <div class="hero-text">
+          <h1 class="display hero-headline-kh">
+            <span class="hero-headline-line">ឈប់ប្រើ AI ត្រឹមកម្រិតគ្រាន់តែជា Chatbot សួរ-ឆ្លើយ!</span>
+            <span class="hero-headline-sub2">មករៀនបង្កើត Prompt ដែលឆ្លើយបានច្បាស់ — និង AI Specialist ដែលធ្វើការតាម Workflow, SOP ផ្ទាល់ខ្លួនរបស់អ្នក</span>
+          </h1>
+        </div>
+
+        <!-- Event cover poster (transparent background) -->
+        <div class="hero-cover reveal">
+          <picture>
+            <source srcset="event-cover.webp" type="image/webp">
+            <img src="event-cover.png" alt="AI for Business Masterclass — SDA&amp;CO x AiSME">
+          </picture>
+          <div class="hero-trust-line">
+            <span class="hero-trust-badge">ជំនាន់ទី ១៧</span>
+            <span class="hero-trust-text">បណ្តុះបណ្តាលតាំងពីឆ្នាំ ២០២៤</span>
+          </div>
+          <div class="hero-date-wrap">
+            <div class="hero-date-eyebrow"><span class="hero-date-eyebrow-kh">កម្មវិធីបន្ទាប់</span>Upcoming</div>
+            <div class="hero-date-banner">១៧–១៨ តុលា ២០២៦</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== INTRODUCTION ==================== -->
+  <section class="intro">
+    <div class="container">
+      <div class="intro-inner">
+        <div class="welcome-video reveal">
+          <div class="welcome-video-frame">
+            <div class="testimonial-video-thumb welcome-video-thumb"
+                 data-video-id="iDG-5SnlS-o"
+                 style="background-image:url('https://i.ytimg.com/vi/iDG-5SnlS-o/maxresdefault.jpg');"
+                 onclick="loadVideo(this)"
+                 role="button"
+                 aria-label="Play welcome video from Coach Sim Dara">
+              <div class="play-button">
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+            </div>
+          </div>
+          <p class="welcome-video-caption">សារស្វាគមន៍ពី Coach Sim Dara</p>
+        </div>
+
+        <h2 class="intro-question reveal">
+          តើលោកអ្នកបាន<strong>ត្រៀមរួចរាល់</strong>ហើយឬនៅ ក្នុងការសម្របខ្លួនទៅនឹងរលកបច្ចេកវិទ្យា AI? បំពាក់ឱ្យខ្លួនឯង និងក្រុមប្រតិបត្តិនូវជំនាញ AI ដើម្បីដឹកនាំ ប្រកួតប្រជែង និងបម្លែងអាជីវកម្មដោយភាពជឿជាក់ក្នុងយុគសម័យឌីជីថល?
+        </h2>
+
+        <p class="intro-body reveal">
+          បច្ចុប្បន្ន មនុស្សជាច្រើនស្គាល់ឧបករណ៍ដូចជា ChatGPT។ តែការដឹងត្រួសៗ និងការចេះប្រើវាឱ្យមានប្រសិទ្ធភាពក្នុងការងារ គឺជារឿងពីរខុសដាច់ពីគ្នាស្រឡះ។ នេះហើយជាមូលហេតុដែលយើងបង្កើតកម្មវិធី AI MasterClass ថ្ងៃនេះ!
+        </p>
+
+        <p class="intro-body reveal">
+          Workshop រយៈពេល ២ ថ្ងៃនេះ ផ្អែកលើ <em>"កាំជណ្ដើរនៃជំនាញ AI ទាំង ៥ កម្រិត (The 5-Level AI Skill Ladder™)"</em> ដែលនឹងជួយលោកអ្នកផ្លាស់ប្តូរពីគ្រាន់តែដឹងត្រួសៗ ទៅជាអ្នកចេះប្រើប្រាស់ AI យ៉ាងស្ទាត់ជំនាញ។
+        </p>
+
+        <p class="intro-body reveal" style="margin-bottom:20px;">
+          សូមចូលរួមជាមួយវគ្គបណ្តុះបណ្តាលពិសេស៖
+        </p>
+
+        <div class="intro-product reveal">
+          <div class="intro-product-eyebrow">AI for Business · Master Class</div>
+          <div class="intro-product-title">Make AI Work Your Way</div>
+          <div class="intro-product-tagline">— At the Business Level</div>
+        </div>
+
+        <blockquote class="intro-quote reveal">
+          <span class="intro-quote-mark">"</span>
+          <p class="intro-quote-text">ការប្រើប្រាស់ AI បើបងប្អូនគ្រាន់តែរៀន search តាម YouTube វាមិនបានដូចអ្វីដែលរំពឹងទុកនោះទេ — តែបើបងប្អូនមកចូលវគ្គ AI MasterClass នេះ ខ្ញុំជឿជាក់ថាបងប្អូននឹងទទួលបានហួសពីការរំពឹងទុក។</p>
+          <div class="intro-quote-attribution">
+            <img src="testimonial-samphass.jpg" alt="Phal Samphass" class="intro-quote-avatar" loading="lazy">
+            <cite class="intro-quote-cite">— Phal Samphass · CEO of Mun Group Digital</cite>
+          </div>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== OVERVIEW (Capsule style) ==================== -->
+  <section class="section section-cream">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow latin">Workshop Overview</span>
+        <h2 class="display">ព័ត៌មានទូទៅ</h2>
+        <p>អ្វីៗទាំងអស់ដែលអ្នកត្រូវដឹង មុនពេលចុះឈ្មោះចូលរួម</p>
+      </div>
+
+      <div class="event-details reveal">
+        <div class="event-detail">
+          <span class="event-detail-icon">📆</span>
+          <div class="event-detail-body">
+            <span class="event-detail-label">កាលបរិច្ឆេទ</span>
+            <span class="event-detail-value">សៅរ៍–អាទិត្យ ទី ១៧–១៨ តុលា ២០២៦</span>
+          </div>
+        </div>
+        <div class="event-detail">
+          <span class="event-detail-icon">⏰</span>
+          <div class="event-detail-body">
+            <span class="event-detail-label">ម៉ោង</span>
+            <span class="event-detail-value">០៨:៣០ ព្រឹក – ០៤:៣០ ល្ងាច</span>
+          </div>
+        </div>
+        <div class="event-detail">
+          <span class="event-detail-icon">📍</span>
+          <div class="event-detail-body">
+            <span class="event-detail-label">ទីតាំង</span>
+            <span class="event-detail-value">ទួលគោក រាជធានីភ្នំពេញ</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="overview-callout reveal">
+        <p class="overview-callout-line">សម្រាប់ម្ចាស់អាជីវកម្ម និងអ្នកគ្រប់គ្រង</p>
+        <p class="overview-callout-line overview-callout-emphasis">ចំនួនកៅអី តែ ២០ នាក់ប៉ុណ្ណោះ!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== DELIVERABLES (What You'll Walk Away With) ==================== -->
+  <section class="section section-cream-dark">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow latin">What You'll Walk Away With</span>
+        <h2 class="display">អ្វីដែលសិក្ខាកាមនឹងទទួលបាន</h2>
+        <p>១២ ឧបករណ៍ និងជំនាញជាក់ស្តែង — ចាប់ផ្តើមប្រើបានភ្លាមៗ</p>
+      </div>
+      <div class="capsule-grid">
+        <div class="capsule reveal"><span class="capsule-num latin">01</span><span class="capsule-text">រៀនជំនាញ AI ៥ កម្រិត</span></div>
+        <div class="capsule reveal"><span class="capsule-num latin">02</span><span class="capsule-text">គំរូ Prompt (I-CRAFT) សម្រាប់អាជីវកម្មច្រើនទម្រង់</span></div>
+        <div class="capsule reveal"><span class="capsule-num latin">03</span><span class="capsule-text">របៀបកំណត់ Personal Instruction ក្នុង Claude & ChatGPT</span></div>
+        <div class="capsule reveal"><span class="capsule-num latin">04</span><span class="capsule-text">ការណែនាំប្រព័ន្ធ (System Instructions) ចំនួន ២</span></div>
+        <div class="capsule reveal"><span class="capsule-num latin">05</span><span class="capsule-text">របៀបបង្កើត Claude Project & Custom GPT ក្នុងប្រតិបត្តិការអាជីវកម្មប្រចាំថ្ងៃ</span></div>
+        <div class="capsule reveal"><span class="capsule-num latin">06</span><span class="capsule-text">របៀបប្រើ AI សម្រាប់បង្កើត SOP ផែនការទីផ្សារ ការបង្កើតមាតិកា ធ្វើស្លាយបទបង្ហាញ បង្កើតវីដេអូ និងផ្សេងៗទៀត</span></div>
+        <div class="capsule reveal"><span class="capsule-num latin">07</span><span class="capsule-text">តារាងមាតិកាទីផ្សារសម្រាប់ ៣០ ថ្ងៃ</span></div>
+        <div class="capsule reveal"><span class="capsule-num latin">08</span><span class="capsule-text">GPT សម្រាប់ធ្វើរបាយការណ៍ហិរញ្ញវត្ថុ</span></div>
+        <div class="capsule reveal"><span class="capsule-num latin">09</span><span class="capsule-text">ប្លង់មេប្រព័ន្ធអាជីវកម្ម AI ផ្ទាល់ខ្លួន</span></div>
+        <div class="capsule reveal"><span class="capsule-num latin">10</span><span class="capsule-text">ផែនការសកម្មភាព AI រយៈពេល ៩០ ថ្ងៃ</span></div>
+        <div class="capsule reveal"><span class="capsule-num latin">11</span><span class="capsule-text">សៀវភៅ ជំនាញ AI ៥ កម្រិត (Workbook)</span></div>
+        <div class="capsule reveal"><span class="capsule-num latin">12</span><span class="capsule-text">ការចូលទៅប្រើ AI Coach សម្រាប់ការណែនាំបន្តក្រោយរៀន</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ALUMNI BENEFITS (ongoing support) ==================== -->
+  <section class="section alumni-benefits">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow latin">Beyond the 2 Days</span>
+        <h2 class="display">មិនមែនបញ្ចប់ត្រឹម ២ ថ្ងៃទេ</h2>
+        <p>អ្នកទទួលបានការគាំទ្របន្តជាបន្តបន្ទាប់ បន្ទាប់ពីវគ្គបញ្ចប់ — ដោយឥតគិតថ្លៃបន្ថែម</p>
+      </div>
+      <div class="alumni-grid">
+        <div class="alumni-card reveal">
+          <div class="alumni-icon alumni-icon-photo">
+            <img src="aicoach-natalie.png" alt="AI Coach" loading="lazy">
+          </div>
+          <h3 class="alumni-title">AI Coach</h3>
+          <p class="alumni-desc">
+            ជំនួយការ AI ផ្ទាល់ខ្លួនរបស់អ្នកនៅលើ Telegram — សួរបាន ២៤ ម៉ោង ពេលអ្នកជាប់គាំង ឬត្រូវការការណែនាំពីរបៀបប្រើ AI ក្នុងការងារ។
+          </p>
+        </div>
+        <div class="alumni-card reveal">
+          <div class="alumni-icon alumni-icon-photo">
+            <img src="aisme-club-logo.png" alt="AiSME Club" loading="lazy">
+          </div>
+          <h3 class="alumni-title">AiSME Club</h3>
+          <p class="alumni-desc">
+            ចូលរួមក្នុងបណ្តាញ Telegram ឯកជនសម្រាប់សិក្ខាកាមចាស់ — ចែករំលែកបទពិសោធន៍ ទទួលមាតិកាថ្មីៗ និងភ្ជាប់ទំនាក់ទំនងជាមួយម្ចាស់អាជីវកម្មដទៃទៀត។
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section section-cream">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow latin">Course Outline</span>
+        <h2 class="display">មាតិកាវគ្គសិក្សា</h2>
+        <p>ប្រាំបីមេរៀន ឆ្លងកាត់ ២ ថ្ងៃ — ពីមូលដ្ឋានគ្រឹះ ដល់ការអនុវត្តជាក់ស្តែង</p>
+      </div>
+      <div class="day-cards">
+        <!-- DAY 1 -->
+        <div class="day-card day-1 reveal">
+          <div class="day-label latin">Day 01</div>
+          <h3 class="display">មូលដ្ឋានគ្រឹះ និងភាពស្ទាត់ជំនាញ</h3>
+          <p class="day-subject">ចេះប្រើប្រាស់ប្រព័ន្ធ AI ពេញលេញ</p>
+          <ul class="lesson-list">
+            <li class="lesson">
+              <div class="lesson-title">មេរៀនទី ១៖ ជំនាញ AI ៥ កម្រិត + ការអនុវត្ត I-CRAFT</div>
+              <div class="lesson-desc">មូលដ្ឋានគ្រឹះសម្រាប់អ្នកចាប់ផ្តើមដំបូង — កម្រិតទី ២ (I-CRAFT Deep Dive) និងកម្រិតទី ៣ (Personal Instruction)</div>
+            </li>
+            <li class="lesson">
+              <div class="lesson-title">មេរៀនទី ២៖ ការណែនាំប្រព័ន្ធ (System Instruction Mastery)</div>
+              <div class="lesson-desc">ខ្លឹមសារផ្តាច់មុខសម្រាប់ Master Class — រចនាសម្ព័ន្ធនៃការសរសេរការណែនាំប្រព័ន្ធ និងការអនុវត្តដោយផ្ទាល់</div>
+            </li>
+            <li class="lesson">
+              <div class="lesson-title">មេរៀនទី ៣៖ បង្កើត Custom GPT ផ្ទាល់ខ្លួន</div>
+              <div class="lesson-desc">រៀនបង្កើត GPT និង Project មួយសម្រាប់អាជីវកម្មរបស់អ្នក</div>
+            </li>
+            <li class="lesson">
+              <div class="lesson-title">មេរៀនទី ៤៖ AI សម្រាប់ប្រតិបត្តិការ និង SOP</div>
+              <div class="lesson-desc">បំប្លែងដំណើរការអាជីវកម្មទៅជា AI-powered SOP</div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- DAY 2 -->
+        <div class="day-card day-2 reveal">
+          <div class="day-label latin">Day 02</div>
+          <h3 class="display">ការអនុវត្ត AI សម្រាប់អាជីវកម្មរបស់អ្នក</h3>
+          <p class="day-subject">អនុវត្ត AI ក្នុងគ្រប់ផ្នែកនៃអាជីវកម្ម</p>
+          <ul class="lesson-list">
+            <li class="lesson">
+              <div class="lesson-title">មេរៀនទី ៥៖ AI សម្រាប់ទីផ្សារ និងមាតិកា</div>
+              <div class="lesson-desc">ការបង្កើតមាតិកាសម្រាប់ Facebook, Telegram, និង Email ជា ២ ភាសា (ខ្មែរ–អង់គ្លេស)</div>
+            </li>
+            <li class="lesson">
+              <div class="lesson-title">មេរៀនទី ៦៖ AI សម្រាប់ហិរញ្ញវត្ថុ និងរបាយការណ៍</div>
+              <div class="lesson-desc">ធ្វើរបាយការណ៍ប្រចាំខែ សេចក្តីសង្ខេបលំហូរសាច់ប្រាក់ និងការវិភាគទិន្នន័យ</div>
+            </li>
+            <li class="lesson">
+              <div class="lesson-title">មេរៀនទី ៧៖ រៀបចំប្លង់មេប្រព័ន្ធអាជីវកម្ម AI</div>
+              <div class="lesson-desc">សិក្សាពីករណីជាក់ស្តែងនៃប្រព័ន្ធអាជីវកម្មក្នុងស្រុកដែលបង្កើតដោយ AI (AI Business Map)</div>
+            </li>
+            <li class="lesson">
+              <div class="lesson-title">មេរៀនទី ៨៖ ផែនការសកម្មភាព AI រយៈពេល ៩០ ថ្ងៃ</div>
+              <div class="lesson-desc">រៀបចំផែនការអនុវត្តជាក់ស្តែងសម្រាប់ក្រុមហ៊ុនរបស់អ្នក</div>
+            </li>
+          </ul>
+          <p class="closing-note">ការបិទវគ្គ៖ ថតរូបជុំគ្នា និងបន្តដំណើរ AI របស់អ្នក</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TESTIMONIALS ==================== -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow latin">Real Voices · Real Results</span>
+        <h2 class="display">សម្លេងពីសិក្ខាកាមមុនៗ</h2>
+        <p>មតិពិតប្រាកដ ពីអ្នកដឹកនាំអាជីវកម្មដែលបានឆ្លងកាត់វគ្គបណ្តុះបណ្តាល</p>
+      </div>
+
+      <!-- ▼ COHORT #1 GROUP PHOTO -->
+      <figure class="cohort-group-photo reveal">
+        <img src="cohort2-group.jpg"
+             alt="Recent AI for Business Master Class in Phnom Penh — graduates with certificates"
+             loading="lazy">
+        <figcaption class="cohort-group-caption">
+          Recent AI for Business · Master Class in Phnom Penh<br>
+          សិក្ខាសាលា AI for Business · Master Class ថ្មីៗនេះ នៅរាជធានីភ្នំពេញ
+        </figcaption>
+      </figure>
+
+      <div class="testimonials-grid">
+
+        <!-- ▼ TESTIMONIAL 1: Mr. Len Sam (Cohort graduate) -->
+        <div class="testimonial-card reveal">
+          <div class="testimonial-quote">
+            <p class="testimonial-quote-text">
+              ខ្ញុំទទួលបទពិសោធន៍ថា លោកគ្រូពិតជាពូកែ មានសិល្បៈបង្រៀនមិនឱ្យយើងធុញ មិនស្ត្រេស។ សម្រាប់ខ្ញុំ ខ្ញុំពេញចិត្តតិចនិកក្នុងការបង្រៀនរបស់លោកគ្រូ។
+            </p>
+          </div>
+          <div class="testimonial-video">
+            <div class="testimonial-video-thumb"
+                 data-video-id="TpR8HKQPvWs"
+                 style="background-image:url('https://i.ytimg.com/vi/TpR8HKQPvWs/maxresdefault.jpg');"
+                 onclick="loadVideo(this)"
+                 role="button"
+                 aria-label="Play testimonial video from Mr. Len Sam">
+              <div class="play-button">
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-attribution">
+            <img src="testimonial-lensam.jpg" alt="លោក Len Sam" class="testimonial-avatar" loading="lazy">
+            <div>
+              <div class="testimonial-name">លោក Len Sam</div>
+              <div class="testimonial-title">CEO · Master MEP Solution Co., Ltd.</div>
+              <div class="testimonial-context">— សិក្ខាកាម AI for Business · Master Class</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ▼ TESTIMONIAL 2: Mr. Nob Manuth (Cohort #1 graduate) -->
+        <div class="testimonial-card reveal">
+          <div class="testimonial-quote">
+            <p class="testimonial-quote-text">
+              ការចំណាយចូលរួមរយៈពេល ២ ថ្ងៃ ថ្នាក់ AI MasterClass នេះ ទទួលបានលទ្ធផលច្រើនមែនទែន។
+            </p>
+          </div>
+          <div class="testimonial-video">
+            <div class="testimonial-video-thumb"
+                 data-video-id="smn-0Y2cUXo"
+                 style="background-image:url('https://i.ytimg.com/vi/smn-0Y2cUXo/maxresdefault.jpg');"
+                 onclick="loadVideo(this)"
+                 role="button"
+                 aria-label="Play testimonial video from Mr. Nob Manuth">
+              <div class="play-button">
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-attribution">
+            <img src="testimonial-manuth.jpg" alt="លោក ណុប ម៉ានុថ" class="testimonial-avatar" loading="lazy">
+            <div>
+              <div class="testimonial-name">លោក ណុប ម៉ានុថ</div>
+              <div class="testimonial-title">Youngsia Real Estate</div>
+              <div class="testimonial-context">— សិក្ខាកាម AI for Business · Master Class</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ▼ TESTIMONIAL 3: Mr. Nop Sovannroth (Cohort #1 graduate) -->
+        <div class="testimonial-card reveal">
+          <div class="testimonial-quote">
+            <p class="testimonial-quote-text">
+              បងប្អូននឹងនិយាយថា Wow ជាមួយលទ្ធផលដែលទទួលបាន — ចំណេញទាំងពេល ចំណេញទាំងផលិតភាព ចំណេញទាំងលុយកាក់។
+            </p>
+          </div>
+          <div class="testimonial-video">
+            <div class="testimonial-video-thumb"
+                 data-video-id="AEa24PQSljU"
+                 style="background-image:url('https://i.ytimg.com/vi/AEa24PQSljU/maxresdefault.jpg');"
+                 onclick="loadVideo(this)"
+                 role="button"
+                 aria-label="Play testimonial video from Mr. Nop Sovannroth">
+              <div class="play-button">
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-attribution">
+            <img src="testimonial-sovannroth.jpg" alt="លោក នប សុវណ្ណរ័ត្ន" class="testimonial-avatar" loading="lazy">
+            <div>
+              <div class="testimonial-name">លោក នប សុវណ្ណរ័ត្ន</div>
+              <div class="testimonial-title">Founder & CEO · NSR</div>
+              <div class="testimonial-context">— សិក្ខាកាម AI for Business · Master Class</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PHOTO STRIP 2 (between Outline and Deliverables) ==================== -->
+  <section class="photo-strip section-cream-dark">
+    <div class="container">
+      <div class="strip-header reveal">
+        <span class="eyebrow latin">Real Workshops · Real Results</span>
+        <h3 class="display">សិក្ខាកាមរបស់យើងកំពុងសិក្សា</h3>
+      </div>
+      <div class="strip-grid reveal">
+        <div class="photo-placeholder">
+          <img src="workshop-4.jpg" alt="Cambodian SME leaders engaged in AI workshop session" loading="lazy">
+        </div>
+        <div class="photo-placeholder">
+          <img src="workshop-5.jpg" alt="Coach Sim Dara teaching AI prompting techniques" loading="lazy">
+        </div>
+        <div class="photo-placeholder">
+          <img src="workshop-6.jpg" alt="Interactive AI Mastery training session" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CTA BLOCK (Burger Layout) ==================== -->
+  <section class="cta-block">
+    <div class="container">
+      <div class="cta-inner reveal">
+        <div class="cta-content">
+          <span class="eyebrow latin">Ready to Transform Your Business?</span>
+          <h2>ចាប់ផ្តើម <em>ដំណើរ AI</em> របស់អ្នកនៅថ្ងៃនេះ</h2>
+
+          <!-- ▼ TOP BUN: what's included with the price -->
+          <div class="cta-bun-top">
+            តម្លៃសិក្សារួមបញ្ចូលកាហ្វេ ភេសជ្ជៈ អាហារសម្រន់ អាហារថ្ងៃត្រង់ និងវិញ្ញាបនបត្រ
+          </div>
+
+          <!-- ▼ ACTIVE REGISTRATION BLOCK (auto-hides after close date) -->
+          <div id="registrationActive">
+
+          <!-- ▼ TWO-TIER PRICING: Solo vs. Group of 3+
+               ════════════════════════════════════════════════════════════════
+               To CHANGE prices: edit dollar amounts directly below.
+               To REMOVE group offer (back to solo only): delete the .tier-group div.
+               ════════════════════════════════════════════════════════════════ -->
+          <div class="cta-pricing-tiers">
+            <div class="pricing-tier tier-solo">
+              <div class="pricing-tier-label">Solo Seat</div>
+              <div class="pricing-tier-price latin">$275</div>
+              <span class="pricing-tier-unit">/ ម្នាក់</span>
+              <p class="pricing-tier-note">ចូលរួមតែម្នាក់ឯង</p>
+            </div>
+            <div class="pricing-tier tier-group">
+              <div class="pricing-tier-label">Group of 3+</div>
+              <div class="pricing-tier-price latin">$220</div>
+              <span class="pricing-tier-unit">/ ម្នាក់</span>
+              <p class="pricing-tier-note">ចូលរួមជាក្រុម ៣ នាក់ ឬច្រើនជាងនេះ</p>
+              <span class="pricing-tier-savings">Save $55/pax</span>
+            </div>
+          </div>
+
+          <!-- ▼ REGISTRATION CLOSE COUNTDOWN (sits directly above Register button)
+               ════════════════════════════════════════════════════════════════
+               To CHANGE the close date: edit data-close-end below.
+               Format: YYYY-MM-DDTHH:MM:SS+07:00 (Phnom Penh timezone)
+               When the date passes:
+                 - This countdown auto-hides
+                 - The pricing tiers + register button auto-hide
+                 - The "Registration Closed" block auto-shows
+               ════════════════════════════════════════════════════════════════ -->
+          <div class="close-countdown" id="closeCountdown" data-close-end="2026-10-10T23:59:59+07:00">
+            <div class="close-countdown-eyebrow">Registration Closes In</div>
+            <div class="close-countdown-title">បិទការចុះឈ្មោះត្រឹមថ្ងៃទី ១០ ខែតុលា ២០២៦ នេះហើយ!</div>
+            <div class="close-countdown-sub">នៅសល់តែ</div>
+            <div class="close-grid">
+              <div class="close-unit">
+                <span class="close-value" id="close-days">--</span>
+                <span class="close-unit-label">Days</span>
+              </div>
+              <div class="close-unit">
+                <span class="close-value" id="close-hours">--</span>
+                <span class="close-unit-label">Hours</span>
+              </div>
+              <div class="close-unit">
+                <span class="close-value" id="close-mins">--</span>
+                <span class="close-unit-label">Mins</span>
+              </div>
+              <div class="close-unit">
+                <span class="close-value" id="close-secs">--</span>
+                <span class="close-unit-label">Secs</span>
+              </div>
+            </div>
+          </div>
+
+          <a href="#register" class="btn-primary">
+            ចុះឈ្មោះឥឡូវនេះ
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+
+          </div>
+          <!-- ▲ END registrationActive -->
+
+          <!-- ▼ REGISTRATION CLOSED STATE (auto-shows after close date) -->
+          <div class="registration-closed" id="registrationClosed">
+            <div class="registration-closed-icon">⏳</div>
+            <div class="registration-closed-title">ការចុះឈ្មោះបានបិទហើយ</div>
+            <p class="registration-closed-body">
+              សិក្ខាសាលា AI for Business · Master Class វគ្គបន្ទាប់នឹងត្រូវបានប្រកាសក្នុងពេលឆាប់ៗនេះ។<br>
+              ដើម្បីទទួលបានព័ត៌មានមុនគេ សូមតាមដាន AiSME Cambodia
+            </p>
+            <a href="https://aismecambodia.com" target="_blank" rel="noopener" class="registration-closed-link">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              ស្វែងយល់បន្ថែម · aismecambodia.com
+            </a>
+          </div>
+
+          <!-- ▼ BOTTOM BUN: bonus value adds -->
+          <div class="cta-bun-bottom">
+            <div class="cta-bonus">
+              <span class="cta-bonus-icon">📚</span>
+              <span class="cta-bonus-text"><strong>មានផ្តល់ឯកសារ</strong> ករណីប្រើប្រាស់ជាក់ស្តែង!</span>
+            </div>
+            <div class="cta-bonus">
+              <span class="cta-bonus-icon">🔗</span>
+              <span class="cta-bonus-text"><strong>ការចូលទៅប្រើ GPT</strong> សម្រាប់ការណែនាំបន្តក្រោយរៀន!</span>
+            </div>
+          </div>
+
+          <!-- ▼ SATISFACTION GUARANTEE -->
+          <div class="cta-guarantee">
+            <div class="cta-guarantee-shield">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <polyline points="9 12 11 14 15 10"/>
+              </svg>
+            </div>
+            <div class="cta-guarantee-title">ការធានាពេញចិត្ត ១០០%</div>
+            <p class="cta-guarantee-body">
+              ប្រសិនបើអ្នក<strong>មិនអាចតាមទាន់</strong> ឬ<strong>មិនពេញចិត្តនឹងលទ្ធផល</strong>នៃការសិក្សា — អ្នកអាច<strong>ចូលរួមវគ្គបន្ទាប់ឡើងវិញ</strong> ដោយមិនបង់ថ្លៃបន្ថែម។
+            </p>
+            <div class="cta-guarantee-divider"></div>
+            <p class="cta-guarantee-tagline">
+              គោលដៅរបស់យើងគឺឱ្យអ្នក<strong>ទទួលបានជោគជ័យ</strong> មិនមែនត្រឹមតែបញ្ចប់វគ្គទេ។
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PHOTO STRIP (3 squares) ==================== -->
+  <section class="photo-strip">
+    <div class="container">
+      <div class="strip-header reveal">
+        <span class="eyebrow latin">From Previous Workshops</span>
+        <h3 class="display">រូបថតពីសិក្ខាសាលាមុនៗ</h3>
+      </div>
+      <div class="strip-grid reveal">
+        <div class="photo-placeholder">
+          <img src="workshop-1.jpg" alt="AI for Business workshop session in Phnom Penh" loading="lazy">
+        </div>
+        <div class="photo-placeholder">
+          <img src="workshop-2.jpg" alt="SME leaders at SDA&amp;CO AI workshop" loading="lazy">
+        </div>
+        <div class="photo-placeholder">
+          <img src="workshop-3.jpg" alt="Participants engaged at the AI Mastery session" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== REGISTER ==================== -->
+  <section class="register" id="register">
+    <div class="container register-inner">
+      <span class="eyebrow latin">Secure Your Seat</span>
+      <h2>ចុះឈ្មោះ <em>ឥឡូវនេះ</em></h2>
+      <p class="register-sub">
+        បំពេញទម្រង់ខាងក្រោម ហើយក្រុមការងាររបស់យើងនឹងទាក់ទងទៅអ្នកវិញតាម Telegram ក្នុងរយៈពេល ២៤ ម៉ោង។
+      </p>
+      <div class="form-card reveal">
+        <!-- FORM (visible by default) -->
+        <div id="registrationForm">
+          <div class="form-field">
+            <label for="name">ឈ្មោះពេញ <span class="required">*</span></label>
+            <input type="text" id="name" name="name" placeholder="សូមបំពេញឈ្មោះពិតសម្រាប់វិញ្ញាបនប័ត្រ" required>
+          </div>
+          <div class="form-field">
+            <label for="phone">លេខទូរស័ព្ទ <span class="required">*</span></label>
+            <input type="tel" id="phone" name="phone" placeholder="012 345 678" required>
+          </div>
+          <div class="form-field">
+            <label for="business">ឈ្មោះអាជីវកម្ម</label>
+            <input type="text" id="business" name="business" placeholder="ឧ. Dara Courier, Sokha Boutique">
+          </div>
+          <div class="form-field">
+            <label for="attendees">ចំនួនអ្នកចូលរួម <span class="required">*</span></label>
+            <input type="text" id="attendees" name="attendees" inputmode="numeric" placeholder="ឧ. ១ នាក់, ២ នាក់, ៣ នាក់" required>
+            <p class="form-hint" style="color: #4ADE80;">💡 ចូលរួម ៣ នាក់ ឬច្រើនជាង = $220/ម្នាក់ (សន្សំ $55/ម្នាក់)</p>
+          </div>
+
+          <!-- Honeypot: hidden from users, flagged when filled (bots fill everything) -->
+          <div class="form-honeypot" aria-hidden="true">
+            <label for="website">Website (leave blank)</label>
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+          </div>
+
+          <button type="button" class="form-submit" id="submitBtn" onclick="submitRegistration()">
+            <span id="submitLabel">
+              ចុះឈ្មោះ
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </span>
+            <span id="submitLoading" style="display:none; align-items:center; gap:10px;">
+              <span class="spinner"></span>
+              <span>កំពុងផ្ញើ...</span>
+            </span>
+          </button>
+
+          <div class="form-error" id="formError"></div>
+
+          <p class="form-note">ទិន្នន័យរបស់អ្នកនឹងត្រូវបានរក្សាជាសម្ងាត់ និងប្រើសម្រាប់ការចុះឈ្មោះនេះតែប៉ុណ្ណោះ</p>
+        </div>
+
+        <!-- SUCCESS PANEL (shown after submission) -->
+        <div class="success-panel" id="successPanel">
+          <div class="success-icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h3>អរគុណ! ការចុះឈ្មោះរបស់អ្នកបានជោគជ័យ ✨</h3>
+
+          <div class="thankyou-video">
+            <div class="welcome-video-frame" id="thankyouVideoFrame">
+              <!-- iframe injected on panel show; muted autoplay -->
+              <button type="button" class="tap-sound-cue" id="tapSoundCue" onclick="unmuteThankyou()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                <span>ចុចដើម្បីស្តាប់សំឡេង</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="success-highlight">
+            ក្រុមការងាររបស់ SDA&amp;CO នឹងទាក់ទងទៅអ្នកតាម Telegram ឬទូរស័ព្ទ ក្នុងរយៈពេល <strong>២៤ ម៉ោង</strong> ដើម្បីផ្តល់ព័ត៌មានលម្អិតបន្ថែម និងបញ្ជាក់ការចុះឈ្មោះ។
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container">
+      <a href="https://aismecambodia.com"
+         target="_blank"
+         rel="noopener"
+         class="footer-brand-link"
+         aria-label="Visit AiSME Cambodia on Facebook">
+        <img src="aisme-logo.png" alt="AiSME" class="footer-logo">
+        <div>
+          <div class="footer-brand-name">AiSME</div>
+          <div class="footer-tag">Real Skills · Real Tools · Real Results</div>
+        </div>
+      </a>
+      <div>
+        <a href="https://aismecambodia.com"
+           target="_blank"
+           rel="noopener"
+           class="footer-follow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          aismecambodia.com
+        </a>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="footer-legal">
+        In partnership with SDA&amp;CO Strategic Advisory · Phnom Penh, Cambodia
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ============================================================
+    // Submit form → Netlify Function → Telegram admin group
+    // ============================================================
+    async function submitRegistration() {
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const business = document.getElementById('business').value.trim();
+      const attendees = document.getElementById('attendees').value.trim();
+      const website = document.getElementById('website').value.trim(); // honeypot
+
+      const errorEl = document.getElementById('formError');
+      const btn = document.getElementById('submitBtn');
+      const labelEl = document.getElementById('submitLabel');
+      const loadingEl = document.getElementById('submitLoading');
+
+      // Clear previous error
+      errorEl.classList.remove('visible');
+      errorEl.textContent = '';
+
+      // Client-side validation — only Name, Phone, and Attendees are required
+      if (!name || !phone || !attendees) {
+        showError('សូមបំពេញព័ត៌មានដែលត្រូវការ (មានសញ្ញា *)');
+        return;
+      }
+
+      // Switch button to loading state
+      btn.disabled = true;
+      labelEl.style.display = 'none';
+      loadingEl.style.display = 'inline-flex';
+
+      try {
+        const response = await fetch('/api/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, phone, business, attendees, website })
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.ok) {
+          // Swap the form for the thank-you panel
+          document.getElementById('registrationForm').style.display = 'none';
+          document.getElementById('successPanel').classList.add('visible');
+
+          // Load the thank-you video: muted autoplay (browser-safe), tap to unmute
+          playThankyouVideo();
+
+          // Scroll the thank-you panel into view
+          document.getElementById('register').scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        } else {
+          showError('មានបញ្ហាក្នុងការផ្ញើ។ សូមព្យាយាមម្តងទៀត ឬទាក់ទងផ្ទាល់តាម Telegram: @coachsimdara');
+          resetButton();
+        }
+      } catch (err) {
+        showError('មិនអាចភ្ជាប់ទៅម៉ាស៊ីនមេបានទេ។ សូមព្យាយាមម្តងទៀត។');
+        resetButton();
+      }
+
+      function showError(msg) {
+        errorEl.textContent = msg;
+        errorEl.classList.add('visible');
+      }
+
+      function resetButton() {
+        btn.disabled = false;
+        labelEl.style.display = 'inline-flex';
+        loadingEl.style.display = 'none';
+      }
+    }
+
+    // Allow Enter key to submit from any input
+    document.querySelectorAll('#registrationForm input').forEach(input => {
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          submitRegistration();
+        }
+      });
+    });
+
+    // ============================================================
+    // Registration Close Countdown
+    // ────────────────────────────────────────────────────────────
+    // Reads the close date from data-close-end on the countdown element.
+    // Updates every second. When the close date passes:
+    //   - Hides the countdown
+    //   - Hides the pricing tiers + register button (#registrationActive)
+    //   - Shows the "Registration Closed" message (#registrationClosed)
+    // Fully automatic — no manual updates needed after the date passes.
+    // ============================================================
+    (function() {
+      const cd = document.getElementById('closeCountdown');
+      if (!cd) return;
+      const endStr = cd.dataset.closeEnd;
+      if (!endStr) return;
+      const endTime = new Date(endStr).getTime();
+      if (isNaN(endTime)) return;
+
+      const elDays = document.getElementById('close-days');
+      const elHours = document.getElementById('close-hours');
+      const elMins = document.getElementById('close-mins');
+      const elSecs = document.getElementById('close-secs');
+      const activeBlock = document.getElementById('registrationActive');
+      const closedBlock = document.getElementById('registrationClosed');
+
+      function pad(n) { return String(n).padStart(2, '0'); }
+
+      function tick() {
+        const now = Date.now();
+        const diff = endTime - now;
+
+        if (diff <= 0) {
+          // Registration closed — swap states
+          cd.classList.add('hidden');
+          if (activeBlock) activeBlock.style.display = 'none';
+          if (closedBlock) closedBlock.classList.add('visible');
+          return false; // stop ticking
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+        if (elDays) elDays.textContent = pad(days);
+        if (elHours) elHours.textContent = pad(hours);
+        if (elMins) elMins.textContent = pad(mins);
+        if (elSecs) elSecs.textContent = pad(secs);
+        return true;
+      }
+
+      // Initial render so users don't see "--"
+      if (tick()) {
+        const interval = setInterval(() => {
+          if (!tick()) clearInterval(interval);
+        }, 1000);
+      }
+    })();
+
+    // ============================================================
+    // Lazy-load YouTube videos in testimonials
+    // (Only loads the iframe when user clicks — saves bandwidth + page-load time.
+    //  Without this, every YouTube embed adds ~500KB to first paint, even unwatched.)
+    // ============================================================
+    function loadVideo(thumbEl) {
+      const videoId = thumbEl.dataset.videoId;
+      if (!videoId) return;
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.title = 'Testimonial video';
+      thumbEl.replaceWith(iframe);
+    }
+
+    // Thank-you video: muted autoplay (always allowed), tap-to-unmute cue
+    function playThankyouVideo() {
+      const frame = document.getElementById('thankyouVideoFrame');
+      if (!frame || frame.dataset.loaded === '1') return;
+      frame.dataset.loaded = '1';
+      const iframe = document.createElement('iframe');
+      iframe.id = 'thankyouIframe';
+      // enablejsapi lets us unmute via postMessage; mute=1 guarantees autoplay works
+      iframe.src = 'https://www.youtube.com/embed/1MTQyh_Ha58?autoplay=1&mute=1&rel=0&playsinline=1&enablejsapi=1';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.title = 'Thank-you video from Coach Sim Dara';
+      // insert iframe before the tap-sound cue so the cue stays on top
+      const cue = document.getElementById('tapSoundCue');
+      frame.insertBefore(iframe, cue);
+    }
+
+    function unmuteThankyou() {
+      const iframe = document.getElementById('thankyouIframe');
+      const cue = document.getElementById('tapSoundCue');
+      if (iframe && iframe.contentWindow) {
+        // YouTube IFrame API postMessage commands
+        iframe.contentWindow.postMessage('{"event":"command","func":"unMute","args":""}', '*');
+        iframe.contentWindow.postMessage('{"event":"command","func":"setVolume","args":[100]}', '*');
+        iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+      }
+      if (cue) cue.classList.add('hidden');
+    }
+
+    // ============================================================
+    // Scroll reveal animation
+    // ============================================================
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 50);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

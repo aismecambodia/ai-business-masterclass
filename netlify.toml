@@ -1,0 +1,17 @@
+# ============================================================================
+# SDA&CO — Netlify configuration
+# This file tells Netlify where to find serverless functions and how to
+# route requests.
+# ============================================================================
+
+[build]
+  # Folder where Netlify looks for serverless functions
+  functions = "netlify/functions"
+
+  # Publish directory — files served to visitors (HTML, images, etc.)
+  # Since our HTML + image sit at the root, we publish from root.
+  publish = "."
+
+[functions]
+  # Use the modern runtime so ES modules (.mjs) work out of the box
+  node_bundler = "esbuild"
