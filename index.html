@@ -2202,6 +2202,83 @@
       .cta-price-new { font-size: 2rem; }
       .btn-primary { padding: 14px 26px; font-size: 0.95rem; }
     }
+
+    /* ===== REDESIGN: nav group, hero offer + dual CTA, section CTA, merged sections, collapsible outline ===== */
+    .nav-cta-group { display: flex; align-items: center; gap: 10px; }
+    .nav-cta-ghost {
+      background: transparent; color: var(--cream);
+      border: 1px solid rgba(255,255,255,0.35);
+    }
+    .nav-cta-ghost:hover { background: rgba(255,255,255,0.08); }
+
+    .hero-offer-line {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px;
+      margin-top: 22px; font-size: 1rem; color: var(--cream);
+      font-family: 'Noto Serif Khmer', serif;
+    }
+    .hero-offer-item strong { color: var(--teal-bright); font-weight: 700; }
+    .hero-offer-seats { color: #FBBF24; font-weight: 600; }
+    .hero-offer-sep { color: rgba(255,255,255,0.4); }
+
+    .hero-cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+    .btn-cta-primary, .btn-cta-ghost {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 15px 30px; border-radius: 100px; font-family: 'Noto Serif Khmer', serif;
+      font-weight: 700; font-size: 1rem; cursor: pointer; transition: transform .2s ease, box-shadow .2s ease;
+      text-decoration: none;
+    }
+    .btn-cta-primary {
+      background: linear-gradient(135deg, #22C55E 0%, #16A34A 100%); color: #06240f;
+      box-shadow: 0 10px 28px rgba(34,197,94,0.35);
+    }
+    .btn-cta-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(34,197,94,0.45); }
+    .btn-cta-ghost {
+      background: rgba(255,255,255,0.06); color: var(--cream);
+      border: 1.5px solid rgba(255,255,255,0.4);
+    }
+    .btn-cta-ghost:hover { background: rgba(255,255,255,0.12); transform: translateY(-2px); }
+
+    .section-cta-wrap { padding: 40px 0 8px; }
+    .section-cta { text-align: center; }
+    .section-cta-note {
+      font-family: 'Noto Serif Khmer', serif; font-size: 1.15rem; font-weight: 600;
+      color: var(--navy); margin-bottom: 18px;
+    }
+    .section-cta .hero-cta-row { justify-content: center; margin-top: 0; }
+    .section-cta .btn-cta-ghost { color: var(--navy); border-color: rgba(31,10,74,0.35); background: rgba(31,10,74,0.04); }
+    .section-cta .btn-cta-ghost:hover { background: rgba(31,10,74,0.09); }
+
+    .alumni-inline { margin-top: 44px; padding-top: 36px; border-top: 1px solid var(--line); }
+    .alumni-inline-title {
+      text-align: center; font-family: 'Noto Serif Khmer', serif; font-size: 1.2rem;
+      font-weight: 700; color: var(--navy); margin-bottom: 28px;
+    }
+    .alumni-inline .alumni-card { background: #fff; border: 1px solid var(--cream-dark); }
+    .alumni-inline .alumni-icon-photo { background: var(--cream); }
+    .alumni-inline .alumni-title { color: var(--navy); }
+    .alumni-inline .alumni-desc { color: var(--muted); }
+
+    .outline-details {
+      max-width: 760px; margin: 40px auto 0; border: 1px solid var(--cream-dark);
+      border-radius: 14px; background: #fff; overflow: hidden;
+    }
+    .outline-summary {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 20px 26px; cursor: pointer; list-style: none;
+      font-family: 'Noto Serif Khmer', serif; font-weight: 700; font-size: 1.05rem; color: var(--navy);
+    }
+    .outline-summary::-webkit-details-marker { display: none; }
+    .outline-chevron { transition: transform .25s ease; color: var(--teal); font-size: 1.3rem; }
+    .outline-details[open] .outline-chevron { transform: rotate(180deg); }
+    .outline-body { padding: 0 20px 24px; }
+    .outline-body .day-cards { margin-top: 4px; }
+    @media (max-width: 640px) {
+      .hero-offer-line { font-size: 0.9rem; gap: 6px 8px; }
+      .hero-cta-row { flex-direction: column; }
+      .btn-cta-primary, .btn-cta-ghost { width: 100%; }
+      .nav-cta-ghost { display: none; }
+      .section-cta-note { font-size: 1.05rem; }
+    }
   </style>
 </head>
 <body>
@@ -2212,7 +2289,10 @@
       <a href="#" aria-label="AI for Business Masterclass">
         <img src="logo-masterclass.png" alt="AI for Business Masterclass" class="brand-logo">
       </a>
-      <a href="#register" class="nav-cta">ចុះឈ្មោះ</a>
+      <div class="nav-cta-group">
+        <a href="https://t.me/coachsimdara" target="_blank" rel="noopener" class="nav-cta nav-cta-ghost">ផ្ញើសារ</a>
+        <a href="#register" class="nav-cta">ចុះឈ្មោះ</a>
+      </div>
     </div>
   </nav>
 
@@ -2225,9 +2305,21 @@
             <span class="hero-headline-line">ឈប់ប្រើ AI ត្រឹមកម្រិតគ្រាន់តែជា Chatbot សួរ-ឆ្លើយ!</span>
             <span class="hero-headline-sub2">មករៀនបង្កើត Prompt ដែលឆ្លើយបានច្បាស់ — និង AI Specialist ដែលធ្វើការតាម Workflow, SOP ផ្ទាល់ខ្លួនរបស់អ្នក</span>
           </h1>
+          <div class="hero-offer-line">
+            <span class="hero-offer-item">📅 ១៧–១៨ តុលា ២០២៦</span>
+            <span class="hero-offer-sep">·</span>
+            <span class="hero-offer-item">Workshop ២ ថ្ងៃ</span>
+            <span class="hero-offer-sep">·</span>
+            <span class="hero-offer-item">ចាប់ពី <strong>$220</strong>/នាក់</span>
+            <span class="hero-offer-sep">·</span>
+            <span class="hero-offer-item hero-offer-seats">ទទួលតែ ២០ នាក់</span>
+          </div>
+          <div class="hero-cta-row">
+            <a href="#register" class="btn-cta-primary">ចុះឈ្មោះឥឡូវនេះ</a>
+            <a href="https://t.me/coachsimdara" target="_blank" rel="noopener" class="btn-cta-ghost">មានសំណួរ? ផ្ញើសារ</a>
+          </div>
         </div>
 
-        <!-- Event cover poster (transparent background) -->
         <div class="hero-cover reveal">
           <picture>
             <source srcset="event-cover.webp" type="image/webp">
@@ -2246,7 +2338,7 @@
     </div>
   </section>
 
-  <!-- ==================== INTRODUCTION ==================== -->
+  <!-- ==================== INTRODUCTION (condensed) ==================== -->
   <section class="intro">
     <div class="container">
       <div class="intro-inner">
@@ -2267,26 +2359,12 @@
         </div>
 
         <h2 class="intro-question reveal">
-          តើលោកអ្នកបាន<strong>ត្រៀមរួចរាល់</strong>ហើយឬនៅ ក្នុងការសម្របខ្លួនទៅនឹងរលកបច្ចេកវិទ្យា AI? បំពាក់ឱ្យខ្លួនឯង និងក្រុមប្រតិបត្តិនូវជំនាញ AI ដើម្បីដឹកនាំ ប្រកួតប្រជែង និងបម្លែងអាជីវកម្មដោយភាពជឿជាក់ក្នុងយុគសម័យឌីជីថល?
+          តើលោកអ្នក<strong>ត្រៀមរួចរាល់</strong>ហើយឬនៅ ក្នុងការសម្របខ្លួនទៅនឹងរលកបច្ចេកវិទ្យា AI?
         </h2>
 
         <p class="intro-body reveal">
-          បច្ចុប្បន្ន មនុស្សជាច្រើនស្គាល់ឧបករណ៍ដូចជា ChatGPT។ តែការដឹងត្រួសៗ និងការចេះប្រើវាឱ្យមានប្រសិទ្ធភាពក្នុងការងារ គឺជារឿងពីរខុសដាច់ពីគ្នាស្រឡះ។ នេះហើយជាមូលហេតុដែលយើងបង្កើតកម្មវិធី AI MasterClass ថ្ងៃនេះ!
+          មនុស្សជាច្រើនស្គាល់ ChatGPT — តែ<strong>ការដឹងត្រួសៗ</strong> និង<strong>ការចេះប្រើវាឱ្យមានប្រសិទ្ធភាព</strong> គឺជារឿងពីរខុសគ្នាស្រឡះ។ Workshop ២ ថ្ងៃនេះ ផ្អែកលើ <em>"កាំជណ្ដើរនៃជំនាញ AI ទាំង ៥ កម្រិត (The 5-Level AI Skill Ladder™)"</em> ដែលនឹងបម្លែងអ្នកពីអ្នកប្រើដឹងត្រួសៗ ទៅជាអ្នកប្រើ AI យ៉ាងស្ទាត់ជំនាញ។
         </p>
-
-        <p class="intro-body reveal">
-          Workshop រយៈពេល ២ ថ្ងៃនេះ ផ្អែកលើ <em>"កាំជណ្ដើរនៃជំនាញ AI ទាំង ៥ កម្រិត (The 5-Level AI Skill Ladder™)"</em> ដែលនឹងជួយលោកអ្នកផ្លាស់ប្តូរពីគ្រាន់តែដឹងត្រួសៗ ទៅជាអ្នកចេះប្រើប្រាស់ AI យ៉ាងស្ទាត់ជំនាញ។
-        </p>
-
-        <p class="intro-body reveal" style="margin-bottom:20px;">
-          សូមចូលរួមជាមួយវគ្គបណ្តុះបណ្តាលពិសេស៖
-        </p>
-
-        <div class="intro-product reveal">
-          <div class="intro-product-eyebrow">AI for Business · Master Class</div>
-          <div class="intro-product-title">Make AI Work Your Way</div>
-          <div class="intro-product-tagline">— At the Business Level</div>
-        </div>
 
         <blockquote class="intro-quote reveal">
           <span class="intro-quote-mark">"</span>
@@ -2300,164 +2378,7 @@
     </div>
   </section>
 
-  <!-- ==================== OVERVIEW (Capsule style) ==================== -->
-  <section class="section section-cream">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="eyebrow latin">Workshop Overview</span>
-        <h2 class="display">ព័ត៌មានទូទៅ</h2>
-        <p>អ្វីៗទាំងអស់ដែលអ្នកត្រូវដឹង មុនពេលចុះឈ្មោះចូលរួម</p>
-      </div>
-
-      <div class="event-details reveal">
-        <div class="event-detail">
-          <span class="event-detail-icon">📆</span>
-          <div class="event-detail-body">
-            <span class="event-detail-label">កាលបរិច្ឆេទ</span>
-            <span class="event-detail-value">សៅរ៍–អាទិត្យ ទី ១៧–១៨ តុលា ២០២៦</span>
-          </div>
-        </div>
-        <div class="event-detail">
-          <span class="event-detail-icon">⏰</span>
-          <div class="event-detail-body">
-            <span class="event-detail-label">ម៉ោង</span>
-            <span class="event-detail-value">០៨:៣០ ព្រឹក – ០៤:៣០ ល្ងាច</span>
-          </div>
-        </div>
-        <div class="event-detail">
-          <span class="event-detail-icon">📍</span>
-          <div class="event-detail-body">
-            <span class="event-detail-label">ទីតាំង</span>
-            <span class="event-detail-value">ទួលគោក រាជធានីភ្នំពេញ</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="overview-callout reveal">
-        <p class="overview-callout-line">សម្រាប់ម្ចាស់អាជីវកម្ម និងអ្នកគ្រប់គ្រង</p>
-        <p class="overview-callout-line overview-callout-emphasis">ចំនួនកៅអី តែ ២០ នាក់ប៉ុណ្ណោះ!</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== DELIVERABLES (What You'll Walk Away With) ==================== -->
-  <section class="section section-cream-dark">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="eyebrow latin">What You'll Walk Away With</span>
-        <h2 class="display">អ្វីដែលសិក្ខាកាមនឹងទទួលបាន</h2>
-        <p>១២ ឧបករណ៍ និងជំនាញជាក់ស្តែង — ចាប់ផ្តើមប្រើបានភ្លាមៗ</p>
-      </div>
-      <div class="capsule-grid">
-        <div class="capsule reveal"><span class="capsule-num latin">01</span><span class="capsule-text">រៀនជំនាញ AI ៥ កម្រិត</span></div>
-        <div class="capsule reveal"><span class="capsule-num latin">02</span><span class="capsule-text">គំរូ Prompt (I-CRAFT) សម្រាប់អាជីវកម្មច្រើនទម្រង់</span></div>
-        <div class="capsule reveal"><span class="capsule-num latin">03</span><span class="capsule-text">របៀបកំណត់ Personal Instruction ក្នុង Claude & ChatGPT</span></div>
-        <div class="capsule reveal"><span class="capsule-num latin">04</span><span class="capsule-text">ការណែនាំប្រព័ន្ធ (System Instructions) ចំនួន ២</span></div>
-        <div class="capsule reveal"><span class="capsule-num latin">05</span><span class="capsule-text">របៀបបង្កើត Claude Project & Custom GPT ក្នុងប្រតិបត្តិការអាជីវកម្មប្រចាំថ្ងៃ</span></div>
-        <div class="capsule reveal"><span class="capsule-num latin">06</span><span class="capsule-text">របៀបប្រើ AI សម្រាប់បង្កើត SOP ផែនការទីផ្សារ ការបង្កើតមាតិកា ធ្វើស្លាយបទបង្ហាញ បង្កើតវីដេអូ និងផ្សេងៗទៀត</span></div>
-        <div class="capsule reveal"><span class="capsule-num latin">07</span><span class="capsule-text">តារាងមាតិកាទីផ្សារសម្រាប់ ៣០ ថ្ងៃ</span></div>
-        <div class="capsule reveal"><span class="capsule-num latin">08</span><span class="capsule-text">GPT សម្រាប់ធ្វើរបាយការណ៍ហិរញ្ញវត្ថុ</span></div>
-        <div class="capsule reveal"><span class="capsule-num latin">09</span><span class="capsule-text">ប្លង់មេប្រព័ន្ធអាជីវកម្ម AI ផ្ទាល់ខ្លួន</span></div>
-        <div class="capsule reveal"><span class="capsule-num latin">10</span><span class="capsule-text">ផែនការសកម្មភាព AI រយៈពេល ៩០ ថ្ងៃ</span></div>
-        <div class="capsule reveal"><span class="capsule-num latin">11</span><span class="capsule-text">សៀវភៅ ជំនាញ AI ៥ កម្រិត (Workbook)</span></div>
-        <div class="capsule reveal"><span class="capsule-num latin">12</span><span class="capsule-text">ការចូលទៅប្រើ AI Coach សម្រាប់ការណែនាំបន្តក្រោយរៀន</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== ALUMNI BENEFITS (ongoing support) ==================== -->
-  <section class="section alumni-benefits">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="eyebrow latin">Beyond the 2 Days</span>
-        <h2 class="display">មិនមែនបញ្ចប់ត្រឹម ២ ថ្ងៃទេ</h2>
-        <p>អ្នកទទួលបានការគាំទ្របន្តជាបន្តបន្ទាប់ បន្ទាប់ពីវគ្គបញ្ចប់ — ដោយឥតគិតថ្លៃបន្ថែម</p>
-      </div>
-      <div class="alumni-grid">
-        <div class="alumni-card reveal">
-          <div class="alumni-icon alumni-icon-photo">
-            <img src="aicoach-natalie.png" alt="AI Coach" loading="lazy">
-          </div>
-          <h3 class="alumni-title">AI Coach</h3>
-          <p class="alumni-desc">
-            ជំនួយការ AI ផ្ទាល់ខ្លួនរបស់អ្នកនៅលើ Telegram — សួរបាន ២៤ ម៉ោង ពេលអ្នកជាប់គាំង ឬត្រូវការការណែនាំពីរបៀបប្រើ AI ក្នុងការងារ។
-          </p>
-        </div>
-        <div class="alumni-card reveal">
-          <div class="alumni-icon alumni-icon-photo">
-            <img src="aisme-club-logo.png" alt="AiSME Club" loading="lazy">
-          </div>
-          <h3 class="alumni-title">AiSME Club</h3>
-          <p class="alumni-desc">
-            ចូលរួមក្នុងបណ្តាញ Telegram ឯកជនសម្រាប់សិក្ខាកាមចាស់ — ចែករំលែកបទពិសោធន៍ ទទួលមាតិកាថ្មីៗ និងភ្ជាប់ទំនាក់ទំនងជាមួយម្ចាស់អាជីវកម្មដទៃទៀត។
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="section section-cream">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="eyebrow latin">Course Outline</span>
-        <h2 class="display">មាតិកាវគ្គសិក្សា</h2>
-        <p>ប្រាំបីមេរៀន ឆ្លងកាត់ ២ ថ្ងៃ — ពីមូលដ្ឋានគ្រឹះ ដល់ការអនុវត្តជាក់ស្តែង</p>
-      </div>
-      <div class="day-cards">
-        <!-- DAY 1 -->
-        <div class="day-card day-1 reveal">
-          <div class="day-label latin">Day 01</div>
-          <h3 class="display">មូលដ្ឋានគ្រឹះ និងភាពស្ទាត់ជំនាញ</h3>
-          <p class="day-subject">ចេះប្រើប្រាស់ប្រព័ន្ធ AI ពេញលេញ</p>
-          <ul class="lesson-list">
-            <li class="lesson">
-              <div class="lesson-title">មេរៀនទី ១៖ ជំនាញ AI ៥ កម្រិត + ការអនុវត្ត I-CRAFT</div>
-              <div class="lesson-desc">មូលដ្ឋានគ្រឹះសម្រាប់អ្នកចាប់ផ្តើមដំបូង — កម្រិតទី ២ (I-CRAFT Deep Dive) និងកម្រិតទី ៣ (Personal Instruction)</div>
-            </li>
-            <li class="lesson">
-              <div class="lesson-title">មេរៀនទី ២៖ ការណែនាំប្រព័ន្ធ (System Instruction Mastery)</div>
-              <div class="lesson-desc">ខ្លឹមសារផ្តាច់មុខសម្រាប់ Master Class — រចនាសម្ព័ន្ធនៃការសរសេរការណែនាំប្រព័ន្ធ និងការអនុវត្តដោយផ្ទាល់</div>
-            </li>
-            <li class="lesson">
-              <div class="lesson-title">មេរៀនទី ៣៖ បង្កើត Custom GPT ផ្ទាល់ខ្លួន</div>
-              <div class="lesson-desc">រៀនបង្កើត GPT និង Project មួយសម្រាប់អាជីវកម្មរបស់អ្នក</div>
-            </li>
-            <li class="lesson">
-              <div class="lesson-title">មេរៀនទី ៤៖ AI សម្រាប់ប្រតិបត្តិការ និង SOP</div>
-              <div class="lesson-desc">បំប្លែងដំណើរការអាជីវកម្មទៅជា AI-powered SOP</div>
-            </li>
-          </ul>
-        </div>
-
-        <!-- DAY 2 -->
-        <div class="day-card day-2 reveal">
-          <div class="day-label latin">Day 02</div>
-          <h3 class="display">ការអនុវត្ត AI សម្រាប់អាជីវកម្មរបស់អ្នក</h3>
-          <p class="day-subject">អនុវត្ត AI ក្នុងគ្រប់ផ្នែកនៃអាជីវកម្ម</p>
-          <ul class="lesson-list">
-            <li class="lesson">
-              <div class="lesson-title">មេរៀនទី ៥៖ AI សម្រាប់ទីផ្សារ និងមាតិកា</div>
-              <div class="lesson-desc">ការបង្កើតមាតិកាសម្រាប់ Facebook, Telegram, និង Email ជា ២ ភាសា (ខ្មែរ–អង់គ្លេស)</div>
-            </li>
-            <li class="lesson">
-              <div class="lesson-title">មេរៀនទី ៦៖ AI សម្រាប់ហិរញ្ញវត្ថុ និងរបាយការណ៍</div>
-              <div class="lesson-desc">ធ្វើរបាយការណ៍ប្រចាំខែ សេចក្តីសង្ខេបលំហូរសាច់ប្រាក់ និងការវិភាគទិន្នន័យ</div>
-            </li>
-            <li class="lesson">
-              <div class="lesson-title">មេរៀនទី ៧៖ រៀបចំប្លង់មេប្រព័ន្ធអាជីវកម្ម AI</div>
-              <div class="lesson-desc">សិក្សាពីករណីជាក់ស្តែងនៃប្រព័ន្ធអាជីវកម្មក្នុងស្រុកដែលបង្កើតដោយ AI (AI Business Map)</div>
-            </li>
-            <li class="lesson">
-              <div class="lesson-title">មេរៀនទី ៨៖ ផែនការសកម្មភាព AI រយៈពេល ៩០ ថ្ងៃ</div>
-              <div class="lesson-desc">រៀបចំផែនការអនុវត្តជាក់ស្តែងសម្រាប់ក្រុមហ៊ុនរបស់អ្នក</div>
-            </li>
-          </ul>
-          <p class="closing-note">ការបិទវគ្គ៖ ថតរូបជុំគ្នា និងបន្តដំណើរ AI របស់អ្នក</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== TESTIMONIALS ==================== -->
+  <!-- ==================== TESTIMONIALS (moved up) ==================== -->
   <section class="testimonials">
     <div class="container">
       <div class="section-header reveal">
@@ -2570,23 +2491,162 @@
     </div>
   </section>
 
-  <!-- ==================== PHOTO STRIP 2 (between Outline and Deliverables) ==================== -->
-  <section class="photo-strip section-cream-dark">
+  <section class="section-cta-wrap section-cream">
     <div class="container">
-      <div class="strip-header reveal">
-        <span class="eyebrow latin">Real Workshops · Real Results</span>
-        <h3 class="display">សិក្ខាកាមរបស់យើងកំពុងសិក្សា</h3>
+  <div class="section-cta reveal">
+    <p class="section-cta-note">ចង់ទទួលបានលទ្ធផលដូចពួកគាត់ដែរ?</p>
+    <div class="hero-cta-row">
+      <a href="#register" class="btn-cta-primary">ចុះឈ្មោះឥឡូវនេះ</a>
+      <a href="https://t.me/coachsimdara" target="_blank" rel="noopener" class="btn-cta-ghost">មានសំណួរ? ផ្ញើសារ</a>
+    </div>
+  </div>
+    </div>
+  </section>
+
+  <!-- ==================== WHAT YOU GET (merged) ==================== -->
+  <section class="section section-cream-dark">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow latin">What You'll Walk Away With</span>
+        <h2 class="display">អ្វីដែលអ្នកនឹងទទួលបាន</h2>
+        <p>១២ ឧបករណ៍ និងជំនាញជាក់ស្តែង — ចាប់ផ្តើមប្រើបានភ្លាមៗ</p>
       </div>
-      <div class="strip-grid reveal">
-        <div class="photo-placeholder">
-          <img src="workshop-4.jpg" alt="Cambodian SME leaders engaged in AI workshop session" loading="lazy">
+      <div class="capsule-grid">
+        <div class="capsule reveal"><span class="capsule-num latin">01</span><span class="capsule-text">រៀនជំនាញ AI ៥ កម្រិត</span></div>
+        <div class="capsule reveal"><span class="capsule-num latin">02</span><span class="capsule-text">គំរូ Prompt (I-CRAFT) សម្រាប់អាជីវកម្មច្រើនទម្រង់</span></div>
+        <div class="capsule reveal"><span class="capsule-num latin">03</span><span class="capsule-text">របៀបកំណត់ Personal Instruction ក្នុង Claude & ChatGPT</span></div>
+        <div class="capsule reveal"><span class="capsule-num latin">04</span><span class="capsule-text">ការណែនាំប្រព័ន្ធ (System Instructions) ចំនួន ២</span></div>
+        <div class="capsule reveal"><span class="capsule-num latin">05</span><span class="capsule-text">របៀបបង្កើត Claude Project & Custom GPT ក្នុងប្រតិបត្តិការអាជីវកម្មប្រចាំថ្ងៃ</span></div>
+        <div class="capsule reveal"><span class="capsule-num latin">06</span><span class="capsule-text">របៀបប្រើ AI សម្រាប់បង្កើត SOP ផែនការទីផ្សារ ការបង្កើតមាតិកា ធ្វើស្លាយបទបង្ហាញ បង្កើតវីដេអូ និងផ្សេងៗទៀត</span></div>
+        <div class="capsule reveal"><span class="capsule-num latin">07</span><span class="capsule-text">តារាងមាតិកាទីផ្សារសម្រាប់ ៣០ ថ្ងៃ</span></div>
+        <div class="capsule reveal"><span class="capsule-num latin">08</span><span class="capsule-text">GPT សម្រាប់ធ្វើរបាយការណ៍ហិរញ្ញវត្ថុ</span></div>
+        <div class="capsule reveal"><span class="capsule-num latin">09</span><span class="capsule-text">ប្លង់មេប្រព័ន្ធអាជីវកម្ម AI ផ្ទាល់ខ្លួន</span></div>
+        <div class="capsule reveal"><span class="capsule-num latin">10</span><span class="capsule-text">ផែនការសកម្មភាព AI រយៈពេល ៩០ ថ្ងៃ</span></div>
+        <div class="capsule reveal"><span class="capsule-num latin">11</span><span class="capsule-text">សៀវភៅ ជំនាញ AI ៥ កម្រិត (Workbook)</span></div>
+        <div class="capsule reveal"><span class="capsule-num latin">12</span><span class="capsule-text">ការចូលទៅប្រើ AI Coach សម្រាប់ការណែនាំបន្តក្រោយរៀន</span></div>
+      </div>
+
+      <div class="alumni-inline reveal">
+        <h3 class="alumni-inline-title">មិនមែនបញ្ចប់ត្រឹម ២ ថ្ងៃទេ — ការគាំទ្របន្ត ដោយឥតគិតថ្លៃ</h3>
+      <div class="alumni-grid">
+        <div class="alumni-card reveal">
+          <div class="alumni-icon alumni-icon-photo">
+            <img src="aicoach-natalie.png" alt="AI Coach" loading="lazy">
+          </div>
+          <h3 class="alumni-title">AI Coach</h3>
+          <p class="alumni-desc">
+            ជំនួយការ AI ផ្ទាល់ខ្លួនរបស់អ្នកនៅលើ Telegram — សួរបាន ២៤ ម៉ោង ពេលអ្នកជាប់គាំង ឬត្រូវការការណែនាំពីរបៀបប្រើ AI ក្នុងការងារ។
+          </p>
         </div>
-        <div class="photo-placeholder">
-          <img src="workshop-5.jpg" alt="Coach Sim Dara teaching AI prompting techniques" loading="lazy">
+        <div class="alumni-card reveal">
+          <div class="alumni-icon alumni-icon-photo">
+            <img src="aisme-club-logo.png" alt="AiSME Club" loading="lazy">
+          </div>
+          <h3 class="alumni-title">AiSME Club</h3>
+          <p class="alumni-desc">
+            ចូលរួមក្នុងបណ្តាញ Telegram ឯកជនសម្រាប់សិក្ខាកាមចាស់ — ចែករំលែកបទពិសោធន៍ ទទួលមាតិកាថ្មីៗ និងភ្ជាប់ទំនាក់ទំនងជាមួយម្ចាស់អាជីវកម្មដទៃទៀត។
+          </p>
         </div>
-        <div class="photo-placeholder">
-          <img src="workshop-6.jpg" alt="Interactive AI Mastery training session" loading="lazy">
+      </div>
+      </div>
+
+      <details class="outline-details reveal">
+        <summary class="outline-summary">
+          <span>មើលមាតិកាវគ្គសិក្សាពេញលេញ (៨ មេរៀន · ២ ថ្ងៃ)</span>
+          <span class="outline-chevron">⌄</span>
+        </summary>
+        <div class="outline-body">
+      <div class="day-cards">
+        <!-- DAY 1 -->
+        <div class="day-card day-1 reveal">
+          <div class="day-label latin">Day 01</div>
+          <h3 class="display">មូលដ្ឋានគ្រឹះ និងភាពស្ទាត់ជំនាញ</h3>
+          <p class="day-subject">ចេះប្រើប្រាស់ប្រព័ន្ធ AI ពេញលេញ</p>
+          <ul class="lesson-list">
+            <li class="lesson">
+              <div class="lesson-title">មេរៀនទី ១៖ ជំនាញ AI ៥ កម្រិត + ការអនុវត្ត I-CRAFT</div>
+              <div class="lesson-desc">មូលដ្ឋានគ្រឹះសម្រាប់អ្នកចាប់ផ្តើមដំបូង — កម្រិតទី ២ (I-CRAFT Deep Dive) និងកម្រិតទី ៣ (Personal Instruction)</div>
+            </li>
+            <li class="lesson">
+              <div class="lesson-title">មេរៀនទី ២៖ ការណែនាំប្រព័ន្ធ (System Instruction Mastery)</div>
+              <div class="lesson-desc">ខ្លឹមសារផ្តាច់មុខសម្រាប់ Master Class — រចនាសម្ព័ន្ធនៃការសរសេរការណែនាំប្រព័ន្ធ និងការអនុវត្តដោយផ្ទាល់</div>
+            </li>
+            <li class="lesson">
+              <div class="lesson-title">មេរៀនទី ៣៖ បង្កើត Custom GPT ផ្ទាល់ខ្លួន</div>
+              <div class="lesson-desc">រៀនបង្កើត GPT និង Project មួយសម្រាប់អាជីវកម្មរបស់អ្នក</div>
+            </li>
+            <li class="lesson">
+              <div class="lesson-title">មេរៀនទី ៤៖ AI សម្រាប់ប្រតិបត្តិការ និង SOP</div>
+              <div class="lesson-desc">បំប្លែងដំណើរការអាជីវកម្មទៅជា AI-powered SOP</div>
+            </li>
+          </ul>
         </div>
+
+        <!-- DAY 2 -->
+        <div class="day-card day-2 reveal">
+          <div class="day-label latin">Day 02</div>
+          <h3 class="display">ការអនុវត្ត AI សម្រាប់អាជីវកម្មរបស់អ្នក</h3>
+          <p class="day-subject">អនុវត្ត AI ក្នុងគ្រប់ផ្នែកនៃអាជីវកម្ម</p>
+          <ul class="lesson-list">
+            <li class="lesson">
+              <div class="lesson-title">មេរៀនទី ៥៖ AI សម្រាប់ទីផ្សារ និងមាតិកា</div>
+              <div class="lesson-desc">ការបង្កើតមាតិកាសម្រាប់ Facebook, Telegram, និង Email ជា ២ ភាសា (ខ្មែរ–អង់គ្លេស)</div>
+            </li>
+            <li class="lesson">
+              <div class="lesson-title">មេរៀនទី ៦៖ AI សម្រាប់ហិរញ្ញវត្ថុ និងរបាយការណ៍</div>
+              <div class="lesson-desc">ធ្វើរបាយការណ៍ប្រចាំខែ សេចក្តីសង្ខេបលំហូរសាច់ប្រាក់ និងការវិភាគទិន្នន័យ</div>
+            </li>
+            <li class="lesson">
+              <div class="lesson-title">មេរៀនទី ៧៖ រៀបចំប្លង់មេប្រព័ន្ធអាជីវកម្ម AI</div>
+              <div class="lesson-desc">សិក្សាពីករណីជាក់ស្តែងនៃប្រព័ន្ធអាជីវកម្មក្នុងស្រុកដែលបង្កើតដោយ AI (AI Business Map)</div>
+            </li>
+            <li class="lesson">
+              <div class="lesson-title">មេរៀនទី ៨៖ ផែនការសកម្មភាព AI រយៈពេល ៩០ ថ្ងៃ</div>
+              <div class="lesson-desc">រៀបចំផែនការអនុវត្តជាក់ស្តែងសម្រាប់ក្រុមហ៊ុនរបស់អ្នក</div>
+            </li>
+          </ul>
+          <p class="closing-note">ការបិទវគ្គ៖ ថតរូបជុំគ្នា និងបន្តដំណើរ AI របស់អ្នក</p>
+        </div>
+      </div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ==================== LOGISTICS ==================== -->
+  <section class="section section-cream">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow latin">Workshop Details</span>
+        <h2 class="display">ព័ត៌មានវគ្គសិក្សា</h2>
+      </div>
+      <div class="event-details reveal">
+        <div class="event-detail">
+          <span class="event-detail-icon">📆</span>
+          <div class="event-detail-body">
+            <span class="event-detail-label">កាលបរិច្ឆេទ</span>
+            <span class="event-detail-value">សៅរ៍–អាទិត្យ ទី ១៧–១៨ តុលា ២០២៦</span>
+          </div>
+        </div>
+        <div class="event-detail">
+          <span class="event-detail-icon">⏰</span>
+          <div class="event-detail-body">
+            <span class="event-detail-label">ម៉ោង</span>
+            <span class="event-detail-value">០៨:៣០ ព្រឹក – ០៤:៣០ ល្ងាច</span>
+          </div>
+        </div>
+        <div class="event-detail">
+          <span class="event-detail-icon">📍</span>
+          <div class="event-detail-body">
+            <span class="event-detail-label">ទីតាំង</span>
+            <span class="event-detail-value">ទួលគោក រាជធានីភ្នំពេញ</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="overview-callout reveal">
+        <p class="overview-callout-line">សម្រាប់ម្ចាស់អាជីវកម្ម និងអ្នកគ្រប់គ្រង</p>
+        <p class="overview-callout-line overview-callout-emphasis">ចំនួនកៅអី តែ ២០ នាក់ប៉ុណ្ណោះ!</p>
       </div>
     </div>
   </section>
@@ -2718,7 +2778,8 @@
     </div>
   </section>
 
-  <!-- ==================== PHOTO STRIP (3 squares) ==================== -->
+
+  <!-- ==================== PHOTO STRIP ==================== -->
   <section class="photo-strip">
     <div class="container">
       <div class="strip-header reveal">
@@ -2739,13 +2800,15 @@
     </div>
   </section>
 
+
   <!-- ==================== REGISTER ==================== -->
   <section class="register" id="register">
     <div class="container register-inner">
       <span class="eyebrow latin">Secure Your Seat</span>
       <h2>ចុះឈ្មោះ <em>ឥឡូវនេះ</em></h2>
       <p class="register-sub">
-        បំពេញទម្រង់ខាងក្រោម ហើយក្រុមការងាររបស់យើងនឹងទាក់ទងទៅអ្នកវិញតាម Telegram ក្នុងរយៈពេល ២៤ ម៉ោង។
+        បំពេញទម្រង់ខាងក្រោម ហើយក្រុមការងាររបស់យើងនឹងទាក់ទងទៅអ្នកវិញតាម Telegram ក្នុងរយៈពេល ២៤ ម៉ោង។<br>
+        ឬបើមានសំណួរ សូម <a href="https://t.me/coachsimdara" target="_blank" rel="noopener" class="register-tg-link">ផ្ញើសារមកយើងផ្ទាល់តាម Telegram →</a>
       </p>
       <div class="form-card reveal">
         <!-- FORM (visible by default) -->
@@ -2814,6 +2877,7 @@
       </div>
     </div>
   </section>
+
 
   <!-- ==================== FOOTER ==================== -->
   <footer class="footer">
