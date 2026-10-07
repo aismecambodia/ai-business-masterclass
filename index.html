@@ -8,7 +8,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&family=Noto+Serif+Khmer:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -44,13 +44,13 @@
     }
 
     .display {
-      font-family: 'Noto Serif Khmer', serif;
-      font-weight: 600;
-      line-height: 1.25;
-      letter-spacing: -0.01em;
+      font-family: 'Kantumruy Pro', sans-serif;
+      font-weight: 700;
+      line-height: 1.22;
+      letter-spacing: 0;
     }
 
-    .latin { font-family: 'Playfair Display', serif; }
+    .latin { font-family: 'Inter', sans-serif; }
 
     .eyebrow {
       font-family: 'Kantumruy Pro', sans-serif;
@@ -72,11 +72,11 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      padding: 16px 0;
-      background: rgba(31, 10, 74, 0.85);
+      padding: 14px 0;
+      background: rgba(248, 246, 241, 0.88);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--line);
+      border-bottom: 1px solid var(--line-dark);
     }
     .nav-inner {
       display: flex;
@@ -85,7 +85,7 @@
     }
     .brand {
       color: var(--cream);
-      font-family: 'Playfair Display', serif;
+      font-family: 'Inter', sans-serif;
       font-weight: 700;
       font-size: 1.25rem;
       letter-spacing: 0.02em;
@@ -214,7 +214,7 @@
     }
     .hero-sub-punchline {
       display: inline-block;
-      font-family: 'Noto Serif Khmer', serif;
+      font-family: 'Kantumruy Pro', sans-serif;
       font-size: clamp(1.1rem, 1.9vw, 1.35rem);
       font-weight: 700;
       color: var(--teal-bright);
@@ -298,7 +298,7 @@
       margin-top: 14px;
       font-size: 0.95rem;
       color: var(--muted);
-      font-family: 'Noto Serif Khmer', serif;
+      font-family: 'Kantumruy Pro', sans-serif;
     }
     .welcome-video-frame iframe {
       position: absolute;
@@ -325,7 +325,7 @@
       color: #fff;
       border: 1px solid rgba(255,255,255,0.25);
       border-radius: 100px;
-      font-family: 'Noto Serif Khmer', serif;
+      font-family: 'Kantumruy Pro', sans-serif;
       font-size: 0.82rem;
       font-weight: 600;
       cursor: pointer;
@@ -340,7 +340,7 @@
       50% { box-shadow: 0 0 0 8px rgba(34,197,94,0); }
     }
     .intro-question {
-      font-family: 'Noto Serif Khmer', serif;
+      font-family: 'Kantumruy Pro', sans-serif;
       font-size: clamp(1.4rem, 2.8vw, 2rem);
       font-weight: 600;
       color: var(--navy);
@@ -378,7 +378,7 @@
       box-shadow: 0 16px 40px rgba(31, 10, 74, 0.18);
     }
     .intro-product-eyebrow {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Inter', sans-serif;
       font-size: 0.78rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -386,7 +386,7 @@
       margin-bottom: 8px;
     }
     .intro-product-title {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Inter', sans-serif;
       font-size: clamp(1.4rem, 2.8vw, 2rem);
       font-weight: 700;
       line-height: 1.2;
@@ -394,7 +394,7 @@
       margin-bottom: 6px;
     }
     .intro-product-tagline {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Inter', sans-serif;
       font-style: italic;
       font-size: 0.95rem;
       color: rgba(248, 245, 238, 0.75);
@@ -413,13 +413,13 @@
       position: absolute;
       top: 4px;
       left: 16px;
-      font-family: 'Playfair Display', serif;
+      font-family: 'Inter', sans-serif;
       font-size: 3rem;
       color: rgba(34, 197, 94, 0.25);
       line-height: 1;
     }
     .intro-quote-text {
-      font-family: 'Noto Serif Khmer', serif;
+      font-family: 'Kantumruy Pro', sans-serif;
       font-size: clamp(1.05rem, 1.8vw, 1.2rem);
       font-weight: 600;
       color: var(--navy);
@@ -461,7 +461,7 @@
       margin-bottom: 48px;
     }
     .intro-promise-lead {
-      font-family: 'Noto Serif Khmer', serif;
+      font-family: 'Kantumruy Pro', sans-serif;
       font-size: 1.15rem;
       font-weight: 600;
       color: var(--navy);
@@ -489,7 +489,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-family: 'Playfair Display', serif;
+      font-family: 'Inter', sans-serif;
       font-weight: 700;
       font-size: 0.95rem;
       letter-spacing: 0.05em;
@@ -547,14 +547,14 @@
       padding: 5px 14px;
       background: linear-gradient(135deg, #FCD34D 0%, #FBBF24 100%);
       color: #12124F;
-      font-family: 'Noto Serif Khmer', serif;
+      font-family: 'Kantumruy Pro', sans-serif;
       font-size: 1rem;
       font-weight: 700;
       border-radius: 100px;
       letter-spacing: 0.01em;
     }
     .hero-trust-text {
-      font-family: 'Noto Serif Khmer', serif;
+      font-family: 'Kantumruy Pro', sans-serif;
       font-size: 0.85rem;
       color: rgba(248, 245, 238, 0.85);
       font-weight: 500;
@@ -566,7 +566,7 @@
     .hero-date-eyebrow {
       display: inline-block;
       margin-bottom: 10px;
-      font-family: 'Playfair Display', serif;
+      font-family: 'Inter', sans-serif;
       font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 0.22em;
@@ -574,7 +574,7 @@
       color: #FBBF24;
     }
     .hero-date-eyebrow-kh {
-      font-family: 'Noto Serif Khmer', serif;
+      font-family: 'Kantumruy Pro', sans-serif;
       font-size: 0.95rem;
       font-weight: 600;
       letter-spacing: 0;
@@ -588,9 +588,9 @@
       background: linear-gradient(135deg, #FCD34D 0%, #FBBF24 100%);
       border-radius: 14px;
       text-align: center;
-      font-family: 'Noto Serif Khmer', serif;
+      font-family: 'Kantumruy Pro', sans-serif;
       font-size: clamp(1.35rem, 2.6vw, 1.7rem);
-      font-weight: 800;
+      font-weight: 700;
       color: #12124F;
       letter-spacing: 0.01em;
       box-shadow: 0 14px 32px rgba(245, 158, 11, 0.35),
@@ -626,7 +626,7 @@
       box-shadow: 0 6px 18px rgba(31, 10, 74, 0.06);
     }
     .capsule-num {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Inter', sans-serif;
       font-size: 1.3rem;
       color: var(--teal-dim);
       font-weight: 500;
@@ -722,14 +722,14 @@
       border-radius: 50%;
     }
     .alumni-title {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Inter', sans-serif;
       font-size: 1.4rem;
       font-weight: 700;
       margin-bottom: 12px;
       color: #fff;
     }
     .alumni-desc {
-      font-family: 'Noto Serif Khmer', serif;
+      font-family: 'Kantumruy Pro', sans-serif;
       font-size: 0.98rem;
       line-height: 1.75;
       color: rgba(255,255,255,0.92);
@@ -781,7 +781,7 @@
       text-align: center;
     }
     .overview-callout-line {
-      font-family: 'Noto Serif Khmer', serif;
+      font-family: 'Kantumruy Pro', sans-serif;
       font-size: clamp(1.05rem, 1.8vw, 1.2rem);
       color: var(--navy);
       line-height: 1.6;
@@ -827,7 +827,7 @@
       min-width: 0;
     }
     .event-detail-label {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Inter', sans-serif;
       font-size: 0.7rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
@@ -888,7 +888,7 @@
     }
     .promise-item:last-child { border-bottom: none; }
     .promise-num {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Inter', sans-serif;
       font-size: 1.15rem;
       color: var(--teal-bright);
       font-weight: 500;
@@ -928,7 +928,7 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      font-family: 'Playfair Display', serif;
+      font-family: 'Inter', sans-serif;
       font-size: 0.85rem;
       font-weight: 500;
       letter-spacing: 0.1em;
@@ -1039,7 +1039,7 @@
       margin-bottom: 12px;
     }
     .cta-block h2 {
-      font-family: 'Noto Serif Khmer', serif;
+      font-family: 'Kantumruy Pro', sans-serif;
       font-size: clamp(1.5rem, 3vw, 2rem);
       color: var(--cream);
       margin-bottom: 10px;
@@ -1064,7 +1064,7 @@
       margin-bottom: 22px;
     }
     .cta-price-row strong {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Inter', sans-serif;
       font-size: 2.25rem;
       font-weight: 700;
       color: var(--cream);
@@ -1105,7 +1105,7 @@
       flex-wrap: wrap;
     }
     .cta-price-old {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Inter', sans-serif;
       font-size: 1.5rem;
       font-weight: 500;
       color: rgba(248, 245, 238, 0.5);
@@ -1115,7 +1115,7 @@
       line-height: 1;
     }
     .cta-price-new {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Inter', sans-serif;
       font-size: 2.5rem;
       font-weight: 700;
       color: #FBBF24;
@@ -1193,7 +1193,7 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      font-family: 'Playfair Display', serif;
+      font-family: 'Inter', sans-serif;
       font-size: 0.7rem;
       font-weight: 700;
       letter-spacing: 0.2em;
@@ -1203,7 +1203,7 @@
     }
     .close-countdown-eyebrow::before { content: '⚠'; font-size: 0.9rem; }
     .close-countdown-title {
-      font-family: 'Noto Serif Khmer', serif;
+      font-family: 'Kantumruy Pro', sans-serif;
       font-size: clamp(0.95rem, 1.6vw, 1.05rem);
       font-weight: 700;
       color: var(--cream);
@@ -1234,7 +1234,7 @@
       justify-content: center;
     }
     .close-value {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Inter', sans-serif;
       font-size: 1.6rem;
       font-weight: 700;
       color: #FBBF24;
@@ -1277,7 +1277,7 @@
       margin-bottom: 14px;
     }
     .registration-closed-title {
-      font-family: 'Noto Serif Khmer', serif;
+      font-family: 'Kantumruy Pro', sans-serif;
       font-size: 1.25rem;
       font-weight: 700;
       color: var(--cream);
@@ -1357,14 +1357,14 @@
       color: #0A0518;
       padding: 4px 12px;
       border-radius: 100px;
-      font-family: 'Playfair Display', serif;
+      font-family: 'Inter', sans-serif;
       font-size: 0.65rem;
       font-weight: 700;
       letter-spacing: 0.12em;
       white-space: nowrap;
     }
     .pricing-tier-label {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Inter', sans-serif;
       font-size: 0.78rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
@@ -1376,7 +1376,7 @@
       color: rgba(248, 245, 238, 0.65);
     }
     .pricing-tier-price {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Inter', sans-serif;
       font-size: 2rem;
       font-weight: 700;
       color: var(--cream);
@@ -1413,7 +1413,7 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      font-family: 'Playfair Display', serif;
+      font-family: 'Inter', sans-serif;
       font-size: 0.78rem;
       font-weight: 700;
       letter-spacing: 0.18em;
@@ -1440,7 +1440,7 @@
       justify-content: center;
     }
     .countdown-value {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Inter', sans-serif;
       font-size: 1.85rem;
       font-weight: 700;
       color: var(--cream);
@@ -1524,7 +1524,7 @@
       color: #FBBF24;
     }
     .cta-guarantee-title {
-      font-family: 'Noto Serif Khmer', serif;
+      font-family: 'Kantumruy Pro', sans-serif;
       font-size: 1.1rem;
       font-weight: 700;
       color: #FBBF24;
@@ -1592,7 +1592,7 @@
     }
     .cohort-group-caption {
       margin-top: 16px;
-      font-family: 'Playfair Display', serif;
+      font-family: 'Inter', sans-serif;
       font-size: 0.92rem;
       font-style: italic;
       color: var(--muted);
@@ -1621,7 +1621,7 @@
       position: absolute;
       top: 8px;
       left: 24px;
-      font-family: 'Playfair Display', serif;
+      font-family: 'Inter', sans-serif;
       font-size: 5rem;
       font-weight: 700;
       line-height: 1;
@@ -1630,7 +1630,7 @@
     }
     .testimonial-quote-text {
       position: relative;
-      font-family: 'Noto Serif Khmer', serif;
+      font-family: 'Kantumruy Pro', sans-serif;
       font-weight: 600;
       font-size: 1.1rem;
       line-height: 1.6;
@@ -1720,7 +1720,7 @@
       justify-content: center;
       background: linear-gradient(135deg, var(--teal) 0%, var(--teal-bright) 100%);
       color: white;
-      font-family: 'Playfair Display', serif;
+      font-family: 'Inter', sans-serif;
       font-weight: 700;
       font-size: 1.05rem;
       letter-spacing: 0.02em;
@@ -1759,7 +1759,7 @@
       display: block;
     }
     .strip-header h3 {
-      font-family: 'Noto Serif Khmer', serif;
+      font-family: 'Kantumruy Pro', sans-serif;
       font-size: clamp(1.25rem, 2.5vw, 1.5rem);
       color: var(--navy);
     }
@@ -1841,7 +1841,7 @@
       color: var(--teal-bright);
     }
     .register h2 {
-      font-family: 'Noto Serif Khmer', serif;
+      font-family: 'Kantumruy Pro', sans-serif;
       font-size: clamp(1.75rem, 4vw, 2.5rem);
       color: var(--cream);
       margin-bottom: 12px;
@@ -1988,7 +1988,7 @@
       color: var(--teal-bright);
     }
     .success-panel h3 {
-      font-family: 'Noto Serif Khmer', serif;
+      font-family: 'Kantumruy Pro', sans-serif;
       font-size: 1.5rem;
       font-weight: 600;
       color: var(--cream);
@@ -2048,7 +2048,7 @@
       display: block;
     }
     .footer-brand-name {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Inter', sans-serif;
       font-weight: 700;
       font-size: 1.4rem;
       color: var(--teal-bright);
@@ -2206,15 +2206,15 @@
     /* ===== REDESIGN: nav group, hero offer + dual CTA, section CTA, merged sections, collapsible outline ===== */
     .nav-cta-group { display: flex; align-items: center; gap: 10px; }
     .nav-cta-ghost {
-      background: transparent; color: var(--cream);
-      border: 1px solid rgba(255,255,255,0.35);
+      background: #fff; color: #4C1D95;
+      border: 1.5px solid #D9CFF2;
     }
-    .nav-cta-ghost:hover { background: rgba(255,255,255,0.08); }
+    .nav-cta-ghost:hover { background: #F3EEFC; }
 
     .hero-offer-line {
       display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px;
       margin-top: 22px; font-size: 1rem; color: var(--cream);
-      font-family: 'Noto Serif Khmer', serif;
+      font-family: 'Kantumruy Pro', sans-serif;
     }
     .hero-offer-item strong { color: var(--teal-bright); font-weight: 700; }
     .hero-offer-seats { color: #FBBF24; font-weight: 600; }
@@ -2223,7 +2223,7 @@
     .hero-cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
     .btn-cta-primary, .btn-cta-ghost {
       display: inline-flex; align-items: center; justify-content: center;
-      padding: 15px 30px; border-radius: 100px; font-family: 'Noto Serif Khmer', serif;
+      padding: 15px 30px; border-radius: 100px; font-family: 'Kantumruy Pro', sans-serif;
       font-weight: 700; font-size: 1rem; cursor: pointer; transition: transform .2s ease, box-shadow .2s ease;
       text-decoration: none;
     }
@@ -2233,15 +2233,15 @@
     }
     .btn-cta-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(34,197,94,0.45); }
     .btn-cta-ghost {
-      background: rgba(255,255,255,0.06); color: var(--cream);
-      border: 1.5px solid rgba(255,255,255,0.4);
+      background: #fff; color: #4C1D95;
+      border: 1.6px solid #D9CFF2;
     }
-    .btn-cta-ghost:hover { background: rgba(255,255,255,0.12); transform: translateY(-2px); }
+    .btn-cta-ghost:hover { background: #F3EEFC; transform: translateY(-2px); }
 
     .section-cta-wrap { padding: 40px 0 8px; }
     .section-cta { text-align: center; }
     .section-cta-note {
-      font-family: 'Noto Serif Khmer', serif; font-size: 1.15rem; font-weight: 600;
+      font-family: 'Kantumruy Pro', sans-serif; font-size: 1.15rem; font-weight: 600;
       color: var(--navy); margin-bottom: 18px;
     }
     .section-cta .hero-cta-row { justify-content: center; margin-top: 0; }
@@ -2250,7 +2250,7 @@
 
     .alumni-inline { margin-top: 44px; padding-top: 36px; border-top: 1px solid var(--line); }
     .alumni-inline-title {
-      text-align: center; font-family: 'Noto Serif Khmer', serif; font-size: 1.2rem;
+      text-align: center; font-family: 'Kantumruy Pro', sans-serif; font-size: 1.2rem;
       font-weight: 700; color: var(--navy); margin-bottom: 28px;
     }
     .alumni-inline .alumni-card { background: #fff; border: 1px solid var(--cream-dark); }
@@ -2265,7 +2265,7 @@
     .outline-summary {
       display: flex; align-items: center; justify-content: space-between; gap: 12px;
       padding: 20px 26px; cursor: pointer; list-style: none;
-      font-family: 'Noto Serif Khmer', serif; font-weight: 700; font-size: 1.05rem; color: var(--navy);
+      font-family: 'Kantumruy Pro', sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--navy);
     }
     .outline-summary::-webkit-details-marker { display: none; }
     .outline-chevron { transition: transform .25s ease; color: var(--teal); font-size: 1.3rem; }
@@ -2274,11 +2274,87 @@
     .outline-body .day-cards { margin-top: 4px; }
     @media (max-width: 640px) {
       .hero-offer-line { font-size: 0.9rem; gap: 6px 8px; }
-      .hero-cta-row { flex-direction: column; }
-      .btn-cta-primary, .btn-cta-ghost { width: 100%; }
-      .nav-cta-ghost { display: none; }
       .section-cta-note { font-size: 1.05rem; }
     }
+
+    /* ===== LIGHT HERO ===== */
+    .hero-light {
+      position: relative; overflow: hidden;
+      padding: 112px 0 64px;
+      background:
+        radial-gradient(640px 440px at 94% -6%, rgba(168,85,247,.14), transparent 70%),
+        radial-gradient(580px 440px at -4% 112%, rgba(34,197,94,.12), transparent 70%),
+        var(--cream);
+    }
+    .hero-light-wrap {
+      display: grid; grid-template-columns: 1.08fr .92fr; gap: 44px; align-items: center;
+    }
+    .hero-badge-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 9px 16px; border-radius: 100px;
+      background: #EDE7FB; color: #5B21B6; font-weight: 600; font-size: 0.9rem;
+      margin-bottom: 22px;
+    }
+    .hero-light-h1 {
+      font-family: 'Kantumruy Pro', sans-serif; font-weight: 700;
+      font-size: clamp(2.1rem, 4.5vw, 3.5rem); line-height: 1.32;
+      letter-spacing: 0; color: var(--navy);
+    }
+    .hero-light-h1 .hl { color: var(--teal-dim); }
+    .hero-light-sub {
+      margin-top: 18px; font-size: 1.15rem; line-height: 1.65;
+      color: #5B5470; font-weight: 500; max-width: 520px;
+    }
+    .hero-light-sub b { color: var(--navy); font-weight: 700; }
+    .hero-light-offer { margin-top: 20px; font-size: 1rem; color: #6B6480; font-weight: 500; }
+    .hero-light-offer strong { color: var(--teal-dim); }
+    .hero-light-offer .seat { color: #B45309; font-weight: 700; }
+    .hero-light-art { position: relative; }
+    .hl-glow { position: absolute; inset: -6% 4% 10%; background: radial-gradient(closest-side, rgba(34,197,94,.22), transparent); filter: blur(10px); }
+    .hero-light-art img { position: relative; width: 100%; filter: drop-shadow(0 26px 54px rgba(31,10,74,.28)); display: block; }
+    .hl-proofcard {
+      position: absolute; top: 11%; left: -5%; background: #fff; border-radius: 18px;
+      padding: 13px 16px; max-width: 232px; font-size: 0.9rem; font-weight: 600; color: var(--navy);
+      box-shadow: 0 22px 50px -20px rgba(76,29,149,.45);
+    }
+    .hl-proofcard .who { display: block; margin-top: 5px; font-size: 0.78rem; font-weight: 600; color: var(--teal-dim); }
+    .hl-statcard {
+      position: absolute; bottom: 13%; right: -4%; background: #fff; border-radius: 16px;
+      padding: 12px 18px; text-align: center; box-shadow: 0 22px 50px -20px rgba(76,29,149,.45);
+    }
+    .hl-statcard b { display: block; font-family: 'Inter', sans-serif; font-size: 1.5rem; color: var(--teal-dim); line-height: 1; }
+    .hl-statcard span { font-size: 0.76rem; color: #6B6480; font-weight: 600; }
+    @media (max-width: 860px) {
+      .hero-light { padding: 96px 0 48px; }
+      .hero-light-wrap { grid-template-columns: 1fr; gap: 30px; text-align: center; }
+      .hero-badge-pill, .hero-light-sub { margin-left: auto; margin-right: auto; }
+      .hero-cta-row { justify-content: center; }
+      .hero-light-art { max-width: 420px; margin: 8px auto 0; }
+      .hero-light-h1 { font-size: 2rem; }
+    }
+    @media (max-width: 640px) {
+      .hero-cta-row { flex-direction: column; }
+      .hero-cta-row .btn-cta-primary, .hero-cta-row .btn-cta-ghost { width: 100%; }
+      .nav-cta-ghost { display: none; }
+    }
+
+    /* ===== LIGHT THEME: soft rounded cards + purple-tinted shadows ===== */
+    .testimonial-card {
+      border-radius: 20px !important;
+      border: 1px solid #ECE6DB !important;
+      box-shadow: 0 20px 50px -24px rgba(76,29,149,.38) !important;
+    }
+    .capsule {
+      border-radius: 16px !important;
+      box-shadow: 0 14px 34px -22px rgba(76,29,149,.3);
+    }
+    .alumni-inline .alumni-card {
+      border-radius: 20px !important;
+      box-shadow: 0 18px 46px -24px rgba(76,29,149,.34) !important;
+    }
+    .outline-details { box-shadow: 0 18px 46px -26px rgba(76,29,149,.3); }
+    .cohort-group-photo img { box-shadow: 0 24px 60px -28px rgba(76,29,149,.45) !important; }
+    .intro-quote { border-radius: 0 18px 18px 0 !important; }
   </style>
 </head>
 <body>
@@ -2296,44 +2372,27 @@
     </div>
   </nav>
 
-  <!-- ==================== HERO ==================== -->
-  <section class="hero">
-    <div class="container hero-inner">
-      <div class="hero-grid">
-        <div class="hero-text">
-          <h1 class="display hero-headline-kh">
-            <span class="hero-headline-line">ឈប់ប្រើ AI ត្រឹមកម្រិតគ្រាន់តែជា Chatbot សួរ-ឆ្លើយ!</span>
-            <span class="hero-headline-sub2">មករៀនបង្កើត Prompt ដែលឆ្លើយបានច្បាស់ — និង AI Specialist ដែលធ្វើការតាម Workflow, SOP ផ្ទាល់ខ្លួនរបស់អ្នក</span>
-          </h1>
-          <div class="hero-offer-line">
-            <span class="hero-offer-item">📅 ១៧–១៨ តុលា ២០២៦</span>
-            <span class="hero-offer-sep">·</span>
-            <span class="hero-offer-item">Workshop ២ ថ្ងៃ</span>
-            <span class="hero-offer-sep">·</span>
-            <span class="hero-offer-item">ចាប់ពី <strong>$220</strong>/នាក់</span>
-            <span class="hero-offer-sep">·</span>
-            <span class="hero-offer-item hero-offer-seats">ទទួលតែ ២០ នាក់</span>
-          </div>
-          <div class="hero-cta-row">
-            <a href="#register" class="btn-cta-primary">ចុះឈ្មោះឥឡូវនេះ</a>
-            <a href="https://t.me/coachsimdara" target="_blank" rel="noopener" class="btn-cta-ghost">មានសំណួរ? ផ្ញើសារ</a>
-          </div>
+  <!-- ==================== HERO (light) ==================== -->
+  <section class="hero-light">
+    <div class="container hero-light-wrap">
+      <div class="hero-light-text">
+        <div class="hero-badge-pill">⭐ ១៧ ជំនាន់ · លក់អស់គ្រប់ជំនាន់ តាំងពីឆ្នាំ ២០២៤</div>
+        <h1 class="hero-light-h1">ឈប់ប្រើ AI ត្រឹមសួរ-ឆ្លើយ<br>ចេះ <span class="hl">«បញ្ជា»</span> វាឱ្យធ្វើការជំនួសអ្នក</h1>
+        <p class="hero-light-sub">Workshop ២ ថ្ងៃ ប្រែអ្នកពី<b>អ្នកប្រើដឹងត្រួសៗ</b> ទៅជាអ្នកបង្កើតប្រព័ន្ធ AI ដែលធ្វើការជំនួសអ្នក។</p>
+        <div class="hero-cta-row">
+          <a href="#register" class="btn-cta-primary">ចុះឈ្មោះឥឡូវនេះ</a>
+          <a href="https://t.me/coachsimdara" target="_blank" rel="noopener" class="btn-cta-ghost">មានសំណួរ? ផ្ញើសារ</a>
         </div>
-
-        <div class="hero-cover reveal">
-          <picture>
-            <source srcset="event-cover.webp" type="image/webp">
-            <img src="event-cover.png" alt="AI for Business Masterclass — SDA&amp;CO x AiSME">
-          </picture>
-          <div class="hero-trust-line">
-            <span class="hero-trust-badge">ជំនាន់ទី ១៧</span>
-            <span class="hero-trust-text">បណ្តុះបណ្តាលតាំងពីឆ្នាំ ២០២៤</span>
-          </div>
-          <div class="hero-date-wrap">
-            <div class="hero-date-eyebrow"><span class="hero-date-eyebrow-kh">កម្មវិធីបន្ទាប់</span>Upcoming</div>
-            <div class="hero-date-banner">១៧–១៨ តុលា ២០២៦</div>
-          </div>
-        </div>
+        <p class="hero-light-offer">📅 ១៧–១៨ តុលា ២០២៦ · Workshop ២ ថ្ងៃ · ចាប់ពី <strong>$220</strong>/នាក់ · <span class="seat">ទទួលតែ ២០ នាក់</span></p>
+      </div>
+      <div class="hero-light-art reveal">
+        <div class="hl-glow"></div>
+        <picture>
+          <source srcset="event-cover.webp" type="image/webp">
+          <img src="event-cover.png" alt="AI for Business Masterclass — SDA&amp;CO x AiSME">
+        </picture>
+        <div class="hl-proofcard">💬 "Wow! ចំណេញពិតប្រាកដ"<span class="who">— Phal Samphass · CEO</span></div>
+        <div class="hl-statcard"><b>២០</b><span>កៅអីប៉ុណ្ណោះ</span></div>
       </div>
     </div>
   </section>
