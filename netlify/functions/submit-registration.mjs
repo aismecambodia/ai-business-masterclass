@@ -2,20 +2,26 @@
 // SDA&CO — Workshop Registration Handler
 // Receives form submissions from the sales page and sends them to BOTH:
 //   1. Telegram (SDA&Co_Admin Team group) — instant alert
-//   2. Zapier webhook → Airtable "Workshop Leads" — CRM record
+//   2. Airtable "Workshop Leads" (AiSME Course CRM) — CRM record, written
+//      DIRECTLY via the Airtable REST API (no Zapier middleman).
 // Both fire in parallel via Promise.allSettled, so one failing does not
 // block the other. The visitor sees success as long as Telegram succeeds.
 //
 // Environment variables required (Netlify → Site settings → Environment):
 //   TELEGRAM_BOT_TOKEN  — token from @BotFather
 //   TELEGRAM_CHAT_ID    — group chat ID (negative number for supergroups)
-//   ZAPIER_WEBHOOK_URL  — Zapier Catch Hook URL (routes to Airtable)
+//   AIRTABLE_TOKEN      — Airtable Personal Access Token with
+//                         data.records:write on the AiSME Course CRM base
 //
-// ⚠️ IMPORTANT: This file MUST contain the Zapier integration. If a future
-// redeploy uses an older version of this file without the Zapier code, the
-// Airtable sync will silently stop. Quick integrity check: this file should
-// contain the word "Zapier" and "ZAPIER_WEBHOOK_URL".
+// ⚠️ INTEGRITY CHECK: this file writes leads to Airtable directly. It MUST
+// contain "AIRTABLE_TOKEN" and the AIRTABLE_BASE_ID / AIRTABLE_TABLE_ID
+// below. If a future redeploy drops the Airtable code, the CRM sync stops
+// silently (Telegram still alerts, so no lead is lost — but the record is
+// not created). Base and table IDs are not secrets, so they are hardcoded.
 // ============================================================================
+
+const AIRTABLE_BASE_ID = "appQd32pSVDnOvP5T";   // AiSME Course CRM
+const AIRTABLE_TABLE_ID = "tblSbyJ9qwv1hSK6v";  // Workshop Leads
 
 export default async (request) => {
   // Only accept POST
@@ -56,14 +62,18 @@ export default async (request) => {
   // Read secrets from Netlify environment
   const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
   const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
-  const ZAPIER_WEBHOOK_URL = process.env.ZAPIER_WEBHOOK_URL;
+  const AIRTABLE_TOKEN = process.env.AIRTABLE_TOKEN;
 
   if (!BOT_TOKEN || !CHAT_ID) {
     console.error("Missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID env vars");
     return jsonError("Server not configured", 500);
   }
 
-  // Timestamp in Phnom Penh time
+  // ISO timestamp (UTC) for the Airtable dateTime field; Airtable shows it
+  // in the base's timezone (Asia/Phnom_Penh).
+  const submittedAtISO = new Date().toISOString();
+
+  // Human-readable timestamp for the Telegram message (Phnom Penh time)
   const timestamp = new Date().toLocaleString("en-US", {
     timeZone: "Asia/Phnom_Penh",
     dateStyle: "medium",
@@ -84,7 +94,7 @@ export default async (request) => {
 
   // ---------- Define both delivery tasks ----------
 
-  // Task 1: Telegram alert
+  // Task 1: Telegram alert (critical path)
   const telegramTask = fetch(
     `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
     {
@@ -103,38 +113,57 @@ export default async (request) => {
     return "telegram-ok";
   });
 
-  // Task 2: Zapier webhook → Airtable CRM
-  // Auto-tags each record with source + status + timestamp for the CRM pipeline.
-  const zapierTask = ZAPIER_WEBHOOK_URL
-    ? fetch(ZAPIER_WEBHOOK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: name,
-          phone: phone,
-          business: business || "",
-          attendees: attendees,
-          source: "Sales Page",
-          status: "New",
-          workshop: "AI for Business · July 2026",
-          submitted_at: timestamp,
-        }),
-      }).then((res) => {
-        if (!res.ok) throw new Error("Zapier webhook failed: " + res.status);
-        return "zapier-ok";
+  // Task 2: Airtable CRM record (direct REST API write)
+  // Maps the form to the "Workshop Leads" table. Source/Status/Workshop are
+  // singleSelect fields; the values below match existing options. typecast is
+  // on as a safety net so a future option rename degrades gracefully instead
+  // of 422-failing the whole write.
+  const airtableTask = AIRTABLE_TOKEN
+    ? fetch(
+        `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_ID}`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${AIRTABLE_TOKEN}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            typecast: true,
+            records: [
+              {
+                fields: {
+                  Name: name,
+                  Phone: phone,
+                  Business: business || "",
+                  Attendees: attendees,
+                  Source: "Sales Page",
+                  Status: "New",
+                  Workshop: "AI for Business_MasterClass",
+                  "Submitted At": submittedAtISO,
+                },
+              },
+            ],
+          }),
+        }
+      ).then(async (res) => {
+        if (!res.ok) {
+          const body = await res.text();
+          throw new Error("Airtable write failed: " + res.status + " " + body);
+        }
+        return "airtable-ok";
       })
-    : Promise.reject(new Error("ZAPIER_WEBHOOK_URL not configured"));
+    : Promise.reject(new Error("AIRTABLE_TOKEN not configured"));
 
   // ---------- Fire both in parallel ----------
-  const results = await Promise.allSettled([telegramTask, zapierTask]);
+  const results = await Promise.allSettled([telegramTask, airtableTask]);
 
   const telegramResult = results[0];
-  const zapierResult = results[1];
+  const airtableResult = results[1];
 
-  // Log Zapier failures (so they show in Netlify function logs) but don't
-  // block the user — Telegram is the critical path for lead capture.
-  if (zapierResult.status === "rejected") {
-    console.error("Zapier/Airtable sync failed:", zapierResult.reason);
+  // Log Airtable failures (visible in Netlify function logs) but don't block
+  // the user — Telegram is the critical path for lead capture.
+  if (airtableResult.status === "rejected") {
+    console.error("Airtable CRM sync failed:", airtableResult.reason);
   }
 
   // If Telegram failed, that's a real failure the user should retry.
