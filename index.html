@@ -2018,6 +2018,24 @@
       color: rgba(248, 245, 238, 0.55);
     }
 
+    /* --- Register: light theme for readability --- */
+    .register { background: var(--cream); color: var(--navy); }
+    .register .eyebrow { color: var(--teal-dim); }
+    .register h2 { color: var(--navy); }
+    .register h2 em { color: var(--teal-dim); }
+    .register-sub { color: var(--muted); }
+    .register-tg-link { color: var(--teal-dim); font-weight: 600; text-decoration: underline; }
+    .form-card { background: #fff; border: 1px solid var(--cream-dark); box-shadow: 0 24px 60px -30px rgba(76,29,149,0.3); backdrop-filter: none; -webkit-backdrop-filter: none; }
+    .form-field label { color: var(--navy); }
+    .form-field input { background: #fff; border: 1px solid #DED7CA; color: var(--navy); }
+    .form-field input::placeholder { color: #9A93A5; }
+    .form-hint { color: var(--muted); }
+    .form-note { color: var(--muted); }
+    .success-panel h3 { color: var(--navy); }
+    .success-panel > p { color: var(--muted); }
+    .success-highlight { color: var(--navy); background: rgba(34,197,94,0.1); }
+    .success-icon { color: var(--teal-dim); }
+
     /* ==================== FOOTER ==================== */
     .footer {
       padding: 48px 0 40px;
@@ -2248,15 +2266,16 @@
     .section-cta .btn-cta-ghost { color: var(--navy); border-color: rgba(31,10,74,0.35); background: rgba(31,10,74,0.04); }
     .section-cta .btn-cta-ghost:hover { background: rgba(31,10,74,0.09); }
 
-    .alumni-inline { margin-top: 44px; padding-top: 36px; border-top: 1px solid var(--line); }
+    .alumni-inline { margin-top: 30px; padding-top: 26px; border-top: 1px solid var(--line); }
     .alumni-inline-title {
       text-align: center; font-family: 'Kantumruy Pro', sans-serif; font-size: 1.2rem;
-      font-weight: 700; color: var(--navy); margin-bottom: 28px;
+      font-weight: 700; color: var(--navy); margin-bottom: 20px;
     }
-    .alumni-inline .alumni-card { background: #fff; border: 1px solid var(--cream-dark); }
-    .alumni-inline .alumni-icon-photo { background: var(--cream); }
-    .alumni-inline .alumni-title { color: var(--navy); }
-    .alumni-inline .alumni-desc { color: var(--muted); }
+    .alumni-inline .alumni-grid { max-width: 640px; gap: 16px; margin-top: 22px; }
+    .alumni-inline .alumni-card { background: #fff; border: 1px solid var(--cream-dark); padding: 20px 22px; border-radius: 16px; }
+    .alumni-inline .alumni-icon-photo { background: var(--cream); width: 58px; height: 58px; margin-bottom: 12px; }
+    .alumni-inline .alumni-title { color: var(--navy); font-size: 1.1rem; margin-bottom: 8px; }
+    .alumni-inline .alumni-desc { color: var(--muted); font-size: 0.9rem; }
 
     .outline-details {
       max-width: 760px; margin: 40px auto 0; border: 1px solid var(--cream-dark);
@@ -2876,7 +2895,7 @@
           <div class="form-field">
             <label for="attendees">ចំនួនអ្នកចូលរួម <span class="required">*</span></label>
             <input type="text" id="attendees" name="attendees" inputmode="numeric" placeholder="ឧ. ១ នាក់, ២ នាក់, ៣ នាក់" required>
-            <p class="form-hint" style="color: #4ADE80;">💡 ចូលរួម ៣ នាក់ ឬច្រើនជាង = $220/ម្នាក់ (សន្សំ $55/ម្នាក់)</p>
+            <p class="form-hint" style="color: #16A34A;">💡 ចូលរួម ៣ នាក់ ឬច្រើនជាង = $220/ម្នាក់ (សន្សំ $55/ម្នាក់)</p>
           </div>
 
           <!-- Honeypot: hidden from users, flagged when filled (bots fill everything) -->
